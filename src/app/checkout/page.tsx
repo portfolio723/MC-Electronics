@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -17,33 +18,43 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCart } from '@/hooks/use-cart';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Link from 'next/link';
 
-const formSchema = z.object({
+const shippingFormSchema = z.object({
   name: z.string().min(2, 'Name is required'),
   email: z.string().email('Invalid email address'),
   address: z.string().min(5, 'Address is required'),
   city: z.string().min(2, 'City is required'),
   zip: z.string().min(5, 'Valid ZIP code is required'),
-  cardName: z.string().min(2, 'Name on card is required'),
-  cardNumber: z.string().length(16, 'Card number must be 16 digits'),
-  cardExpiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Invalid expiry date (MM/YY)'),
-  cardCvc: z.string().length(3, 'CVC must be 3 digits'),
 });
+
+const paymentFormSchema = z.object({
+    cardName: z.string().min(2, 'Name on card is required'),
+    cardNumber: z.string().length(16, 'Card number must be 16 digits'),
+    cardExpiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Invalid expiry date (MM/YY)'),
+    cardCvc: z.string().length(3, 'CVC must be 3 digits'),
+});
+
+const checkoutFormSchema = shippingFormSchema.merge(paymentFormSchema);
+
 
 export default function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
   const { toast } = useToast();
   const router = useRouter();
+  const [checkoutStep, setCheckoutStep] = useState<'auth' | 'shipping' | 'payment'>('auth');
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+
+  const form = useForm<z.infer<typeof checkoutFormSchema>>({
+    resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
       name: '', email: '', address: '', city: '', zip: '',
       cardName: '', cardNumber: '', cardExpiry: '', cardCvc: '',
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof checkoutFormSchema>) => {
     console.log('Order placed:', values);
     toast({
       title: 'Order Successful!',
@@ -63,14 +74,55 @@ export default function CheckoutPage() {
     )
   }
 
-  return (
-    <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
-      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl">Checkout</h1>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+  const renderAuthStep = () => (
+    <Card className="mx-auto max-w-lg">
+      <CardHeader>
+        <CardTitle className="text-2xl font-headline">Checkout as Guest or Login</CardTitle>
+        <CardDescription>Sign in for a faster checkout experience.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <Button className="w-full" onClick={() => setCheckoutStep('shipping')}>Continue as Guest</Button>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">Or</span>
+          </div>
+        </div>
+         <Form {...form}>
+            <form className="space-y-4">
+               <FormField control={form.control} name="email" render={({ field }) => (
+                    <FormItem><FormLabel>Email</FormLabel><FormControl><Input placeholder="m@example.com" {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+                 <FormField control={form.control} name="password" render={({ field }) => (
+                    <FormItem><FormLabel>Password</FormLabel><FormControl><Input type="password" {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+                <Button type="submit" className="w-full" onClick={() => {
+                  // Mock login action
+                  setCheckoutStep('shipping');
+                }}>Login</Button>
+            </form>
+         </Form>
+         <div className="mt-4 text-center text-sm">
+            Don&apos;t have an account?{' '}
+            <Link href="#" className="underline">Sign up</Link>
+          </div>
+      </CardContent>
+    </Card>
+  );
+
+  const renderShippingAndPayment = () => (
+     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <Card>
-              <CardHeader><CardTitle>Shipping Information</CardTitle></CardHeader>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                    <CardTitle>Shipping Information</CardTitle>
+                    <Button variant="link" onClick={() => setCheckoutStep('auth')}>Back</Button>
+                </div>
+              </CardHeader>
               <CardContent className="space-y-4">
                 <FormField control={form.control} name="name" render={({ field }) => (
                     <FormItem><FormLabel>Full Name</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
@@ -134,6 +186,13 @@ export default function CheckoutPage() {
             </Card>
         </div>
       </div>
+  );
+
+
+  return (
+    <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
+      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl text-center">Checkout</h1>
+      {checkoutStep === 'auth' ? renderAuthStep() : renderShippingAndPayment()}
     </div>
   );
 }

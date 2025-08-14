@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -7,9 +8,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Trash2 } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, cartTotal, cartCount } = useCart();
+  const { isLoggedIn } = useAuth();
 
   return (
     <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
@@ -24,6 +27,13 @@ export default function CartPage() {
       ) : (
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="space-y-4 lg:col-span-2">
+             {!isLoggedIn && (
+                <Card className="bg-secondary p-4">
+                    <CardContent className="p-0 flex items-center justify-between">
+                        <p className="text-sm text-secondary-foreground">Have an account? <Link href="/login" className="font-bold underline">Login</Link> for a better experience</p>
+                    </CardContent>
+                </Card>
+            )}
             {cartItems.map((item) => (
               <Card key={item.id} className="flex items-center p-4">
                 <Image
@@ -83,3 +93,4 @@ export default function CartPage() {
     </div>
   );
 }
+
