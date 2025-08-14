@@ -9,6 +9,7 @@ import {
   Heart,
   ChevronDown,
   X,
+  Bookmark,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -126,7 +127,7 @@ export function Header() {
              <div className="flex h-16 items-center justify-between border-b px-4">
                <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                  <span className="font-headline text-xl font-bold">ElectroHive</span>
+                  <span className="font-headline text-xl font-bold">ApplianceVerse</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
                   <X className="h-6 w-6" />
@@ -147,7 +148,7 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="hidden md:flex items-center gap-2 mr-6">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-          <span className="font-headline text-2xl font-bold">ElectroHive</span>
+          <span className="font-headline text-2xl font-bold">ApplianceVerse</span>
         </Link>
         
         {/* Centered Search Bar (Desktop) */}
@@ -166,17 +167,17 @@ export function Header() {
              <Button variant="ghost" size="icon" asChild>
                 <Link href="/login"><User className="h-5 w-5" /><span className="sr-only">Login</span></Link>
             </Button>
-            <Link href="/account" passHref>
-                <Button variant="ghost" size="icon" className="relative">
-                    <Heart className="h-5 w-5" />
-                    {wishlistCount > 0 && (
-                      <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
-                        {wishlistCount}
-                      </Badge>
-                    )}
-                    <span className="sr-only">Wishlist</span>
-                </Button>
-            </Link>
+            <Button variant="ghost" size="icon" className="relative" asChild>
+              <Link href="/account">
+                <Heart className="h-5 w-5" />
+                {wishlistCount > 0 && (
+                  <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
+                    {wishlistCount}
+                  </Badge>
+                )}
+                <span className="sr-only">Wishlist</span>
+              </Link>
+            </Button>
             <Button variant="ghost" size="icon" className="relative" asChild>
               <Link href="/cart">
                 <ShoppingCart className="h-5 w-5" />
@@ -190,17 +191,17 @@ export function Header() {
             </Button>
           </div>
 
-            <Link href="/account" passHref className="md:hidden">
-                <Button variant="ghost" size="icon" className="relative">
-                    <Heart className="h-5 w-5" />
-                    {wishlistCount > 0 && (
-                      <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
-                        {wishlistCount}
-                      </Badge>
-                    )}
-                    <span className="sr-only">Wishlist</span>
-                </Button>
+          <Button variant="ghost" size="icon" className="relative md:hidden" asChild>
+            <Link href="/account">
+              <Heart className="h-5 w-5" />
+              {wishlistCount > 0 && (
+                <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
+                  {wishlistCount}
+                </Badge>
+              )}
+              <span className="sr-only">Wishlist</span>
             </Link>
+          </Button>
          
           <Button variant="ghost" size="icon" className="relative md:hidden" asChild>
               <Link href="/cart">
@@ -218,8 +219,18 @@ export function Header() {
       <nav className="hidden border-t bg-background py-2 md:block">
           <div className="container mx-auto flex items-center justify-center gap-6 px-4 md:px-6">
             <NavMenu />
-             <Link href="/contact" className="text-sm font-semibold text-foreground transition-colors hover:text-primary">Contact Us</Link>
-             <Link href="/faq" className="text-sm font-semibold text-foreground transition-colors hover:text-primary">FAQs</Link>
+             <Link href="/products/all?filter=offers" className="text-sm font-semibold text-foreground transition-colors hover:text-primary">Offers</Link>
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="flex items-center gap-1 text-sm font-semibold">
+                    Support <ChevronDown className="h-4 w-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                    <DropdownMenuItem asChild><Link href="/contact">Contact Us</Link></DropdownMenuItem>
+                    <DropdownMenuItem asChild><Link href="/faq">FAQs</Link></DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
           </div>
       </nav>
     </header>

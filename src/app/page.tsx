@@ -17,7 +17,7 @@ export default function Home() {
 
   const featuredProducts = products.slice(0, 4);
   const mainCategories = categories.filter(c => !c.parent && c.slug !== 'offers');
-  const brands = [...new Set(products.map(p => p.brand))];
+  const brands = [...new Set(products.map(p => p.brand))].slice(0, 6);
   
   // Set a future date for the flash sale countdown
   const saleEndDate = new Date();

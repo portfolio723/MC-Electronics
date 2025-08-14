@@ -19,7 +19,7 @@ export function Footer() {
           <div className="flex flex-col items-start lg:col-span-1">
              <Link href="/" className="mb-4 flex items-center gap-2">
                  <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                 <span className="font-headline text-2xl font-bold">ElectroHive</span>
+                 <span className="font-headline text-2xl font-bold">ApplianceVerse</span>
             </Link>
             <p className="text-sm text-muted-foreground">
               Smart Living, Made Simple.
@@ -45,8 +45,8 @@ export function Footer() {
                 <ul className="mt-4 space-y-2">
                   <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">Contact Us</Link></li>
                   <li><Link href="/faq" className="text-sm text-muted-foreground hover:text-primary">FAQs</Link></li>
-                  <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">Return Policy</Link></li>
-                  <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">Warranty Info</Link></li>
+                  <li><Link href="/return-policy" className="text-sm text-muted-foreground hover:text-primary">Return Policy</Link></li>
+                  <li><Link href="/warranty-info" className="text-sm text-muted-foreground hover:text-primary">Warranty Info</Link></li>
                 </ul>
               </div>
                <div>
@@ -69,7 +69,7 @@ export function Footer() {
            </div>
         </div>
         <div className="mt-8 border-t pt-4 flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} ElectroHive. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} ApplianceVerse. All Rights Reserved.</p>
             <div className="flex items-center gap-4 mt-4 sm:mt-0">
                <p>Pay securely with</p>
                <div className="flex items-center gap-2">

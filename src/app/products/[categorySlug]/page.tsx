@@ -1,14 +1,17 @@
 
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, use } from 'react';
 import { products, categories } from '@/lib/data';
 import { ProductFilters } from '@/components/product-filters';
-import { useSearchParams, useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
-export default function CategoryPage() {
-  const params = useParams();
-  const categorySlug = params.categorySlug as string;
+interface PageProps {
+  params: { categorySlug: string };
+}
+
+export default function CategoryPage({ params }: PageProps) {
+  const categorySlug = params.categorySlug;
   const searchParams = useSearchParams();
 
   const category = useMemo(() => categories.find((c) => c.slug === categorySlug), [categorySlug]);
@@ -33,9 +36,10 @@ export default function CategoryPage() {
     }
     // If it's a parent category, get all products from its subcategories
     if (subcategories.length > 0) {
+        const subcategorySlugs = subcategories.map(s => s.slug);
         return products.filter(p => {
             const productCategory = categories.find(c => c.slug === p.category);
-            return productCategory?.parent === categorySlug;
+            return productCategory?.parent === categorySlug || subcategorySlugs.includes(p.category);
         });
     }
     // It's a subcategory
