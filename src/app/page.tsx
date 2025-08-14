@@ -14,7 +14,7 @@ export default function Home() {
   };
 
   const featuredProducts = products.slice(0, 4);
-  const mainCategories = categories.filter(c => !c.parent);
+  const mainCategories = categories.filter(c => !c.parent && c.slug !== 'offers');
 
 
   return (
@@ -22,7 +22,7 @@ export default function Home() {
       <section className="relative h-[60vh] min-h-[400px] w-full bg-gradient-to-r from-primary/80 to-primary">
         <div className="container mx-auto flex h-full flex-col items-center justify-center text-center text-primary-foreground">
           <h1 className="font-headline text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-            Upgrade Your Home
+            Smart Living, Made Simple
           </h1>
           <p className="mt-4 max-w-2xl text-lg md:text-xl">
             Best Deals on Premium Home Appliances and Electronics!
@@ -74,7 +74,7 @@ export default function Home() {
             Don't miss out on our limited-time offers. Perfect gifts for every home.
           </p>
           <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/products/all">Explore Deals</Link>
+            <Link href="/products/all?filter=offers">Explore Deals</Link>
           </Button>
         </div>
       </section>

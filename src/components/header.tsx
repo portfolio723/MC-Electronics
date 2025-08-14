@@ -3,16 +3,13 @@
 import Link from 'next/link';
 import {
   Menu,
-  Search,
   ShoppingCart,
   User,
   Heart,
   ChevronDown,
   X,
-  Home,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
   DropdownMenu,
@@ -32,6 +29,7 @@ import React, { useState } from 'react';
 import type { Category } from '@/lib/types';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { SearchBar } from './search-bar';
 
 const mainNav: { title: string; href: string; type: 'link' | 'dropdown', slug?: string }[] = [
     { title: 'Home', href: '/', type: 'link' },
@@ -39,8 +37,12 @@ const mainNav: { title: string; href: string; type: 'link' | 'dropdown', slug?: 
     { title: 'Small Appliances', href: '/products/small-appliances', type: 'dropdown', slug: 'small-appliances' },
     { title: 'Smart Home', href: '/products/smart-home', type: 'dropdown', slug: 'smart-home' },
     { title: 'Entertainment', href: '/products/entertainment', type: 'dropdown', slug: 'entertainment' },
-    { title: 'Offers', href: '/products/offers', type: 'link' },
-    { title: 'Support', href: '/contact', type: 'link' },
+    { title: 'Offers', href: '/products/all?filter=offers', type: 'link' },
+];
+
+const supportNav: { title: string; href: string; }[] = [
+  { title: 'Contact Us', href: '/contact'},
+  { title: 'FAQs', href: '/faq'},
 ];
 
 export function Header() {
@@ -51,7 +53,7 @@ export function Header() {
   const getSubcategories = (parentSlug: string): Category[] => {
     return categories.filter(c => c.parent === parentSlug);
   };
-  
+
   const NavMenu = ({ isMobile = false }) => (
     <>
       {mainNav.map((item) => {
@@ -78,7 +80,7 @@ export function Header() {
           return (
             <DropdownMenu key={item.title}>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className={cn("flex items-center gap-1 text-sm font-semibold", isActive ? "text-primary" : "text-foreground")}>
+                <Button variant="ghost" className={cn("flex items-center gap-1 text-sm font-semibold", isActive ? "text-primary-active" : "text-foreground")}>
                   {item.title} <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -101,7 +103,7 @@ export function Header() {
             onClick={() => isMobile && setMobileMenuOpen(false)}
             className={cn(
               "font-semibold transition-colors hover:text-primary",
-              isActive ? "text-primary" : "text-foreground",
+              isActive ? "text-primary-active" : "text-foreground",
               isMobile ? "py-2 text-lg" : "text-sm",
             )}
           >
@@ -115,29 +117,63 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center px-4 md:px-6">
-        <Link href="/" className="mr-6 flex items-center gap-2">
-          <Home className="h-6 w-6 text-primary" />
-          <span className="font-headline text-xl font-bold">ApplianceVerse</span>
-        </Link>
-
-        <div className="ml-auto flex items-center gap-2 md:gap-4">
-           <div className="hidden sm:flex flex-1 max-w-md">
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                className="w-full rounded-full bg-secondary pl-9"
-              />
+        {/* Mobile Menu Trigger */}
+        <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="md:hidden mr-4">
+              <Menu className="h-6 w-6" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="flex w-full max-w-sm flex-col p-0">
+             <div className="flex h-16 items-center justify-between border-b px-4">
+               <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12V2H19V12"/><path d="M19 12L12 20L5 12"/><path d="M9 12V21H15V12"/></svg>
+                  <span className="font-headline text-xl font-bold">ElectroHive</span>
+                </Link>
+                <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
+                  <X className="h-6 w-6" />
+                </Button>
             </div>
-          </div>
+            <div className="flex-1 overflow-y-auto p-4">
+              <nav className="flex flex-col gap-4">
+                <NavMenu isMobile={true} />
+              </nav>
+               <div className="my-4 h-px bg-border" />
+                <nav className="flex flex-col gap-4">
+                 <h3 className="text-lg font-medium">Support</h3>
+                  {supportNav.map((item) => (
+                      <Link key={item.title} href={item.href} onClick={() => setMobileMenuOpen(false)} className="py-2 text-muted-foreground">{item.title}</Link>
+                  ))}
+               </nav>
+            </div>
+          </SheetContent>
+        </Sheet>
+        
+        {/* Logo */}
+        <Link href="/" className="hidden md:flex items-center gap-2 mr-6">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12V2H19V12"/><path d="M19 12L12 20L5 12"/><path d="M9 12V21H15V12"/></svg>
+          <span className="font-headline text-2xl font-bold">ElectroHive</span>
+        </Link>
+        
+        {/* Centered Search Bar (Desktop) */}
+        <div className="hidden flex-1 md:flex justify-center">
+            <div className="w-full max-w-lg">
+                <SearchBar />
+            </div>
+        </div>
 
-          <div className="hidden items-center gap-2 md:flex">
+        <div className="flex flex-1 items-center justify-end gap-2 md:gap-4">
+           <div className="md:hidden">
+                <SearchBar />
+           </div>
+           
+           <div className="hidden items-center gap-1 md:flex">
              <Button variant="ghost" size="icon" asChild>
                 <Link href="/login"><User className="h-5 w-5" /><span className="sr-only">Login</span></Link>
             </Button>
             <Button variant="ghost" size="icon" asChild>
-                <Link href="/account/wishlist"><Heart className="h-5 w-5" /><span className="sr-only">Wishlist</span></Link>
+                <Link href="/account"><Heart className="h-5 w-5" /><span className="sr-only">Wishlist</span></Link>
             </Button>
             <Button variant="ghost" size="icon" className="relative" asChild>
               <Link href="/cart">
@@ -152,36 +188,36 @@ export function Header() {
             </Button>
           </div>
 
-          <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="flex w-full max-w-sm flex-col md:hidden">
-              <div className="flex items-center justify-between border-b pb-4">
-                 <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                    <Home className="h-6 w-6 text-primary" />
-                    <span className="font-headline text-xl font-bold">ApplianceVerse</span>
-                  </Link>
-                  <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
-                    <X className="h-6 w-6" />
-                  </Button>
-              </div>
-              <div className="my-4">
-                  <Input placeholder="Search..." />
-              </div>
-              <nav className="flex flex-col gap-2">
-                <NavMenu isMobile={true} />
-              </nav>
-            </SheetContent>
-          </Sheet>
+          <Button variant="ghost" size="icon" className="relative md:hidden" asChild>
+              <Link href="/cart">
+                <ShoppingCart className="h-5 w-5" />
+                {cartCount > 0 && (
+                  <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
+                    {cartCount}
+                  </Badge>
+                )}
+                <span className="sr-only">Shopping Cart</span>
+              </Link>
+            </Button>
         </div>
       </div>
       <nav className="hidden border-t bg-background py-2 md:block">
           <div className="container mx-auto flex items-center justify-center gap-6 px-4 md:px-6">
             <NavMenu />
+             <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="flex items-center gap-1 text-sm font-semibold">
+                  Support <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                 {supportNav.map((item) => (
+                  <DropdownMenuItem key={item.title} asChild>
+                    <Link href={item.href}>{item.title}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
       </nav>
     </header>
