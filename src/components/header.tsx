@@ -38,7 +38,6 @@ const mainNav: { title: string; href: string; type: 'link' | 'dropdown', slug?: 
     { title: 'Small Appliances', href: '/products/small-appliances', type: 'dropdown', slug: 'small-appliances' },
     { title: 'Smart Home', href: '/products/smart-home', type: 'dropdown', slug: 'smart-home' },
     { title: 'Entertainment', href: '/products/entertainment', type: 'dropdown', slug: 'entertainment' },
-    { title: 'Offers', href: '/products/all?filter=offers', type: 'link' },
 ];
 
 const supportNav: { title: string; href: string; }[] = [
@@ -140,13 +139,6 @@ export function Header() {
               <nav className="flex flex-col gap-4">
                 <NavMenu isMobile={true} />
               </nav>
-               <div className="my-4 h-px bg-border" />
-                <nav className="flex flex-col gap-4">
-                 <h3 className="text-lg font-medium">Support</h3>
-                  {supportNav.map((item) => (
-                      <Link key={item.title} href={item.href} onClick={() => setMobileMenuOpen(false)} className="py-2 text-muted-foreground">{item.title}</Link>
-                  ))}
-               </nav>
             </div>
           </SheetContent>
         </Sheet>
@@ -205,20 +197,6 @@ export function Header() {
       <nav className="hidden border-t bg-background py-2 md:block">
           <div className="container mx-auto flex items-center justify-center gap-6 px-4 md:px-6">
             <NavMenu />
-             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="flex items-center gap-1 text-sm font-semibold">
-                  Support <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                 {supportNav.map((item) => (
-                  <DropdownMenuItem key={item.title} asChild>
-                    <Link href={item.href}>{item.title}</Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
       </nav>
     </header>
