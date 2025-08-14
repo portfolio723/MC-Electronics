@@ -61,7 +61,7 @@ export function Footer() {
           </div>
            <div className="lg:col-span-1">
                 <h3 className="font-headline font-semibold">Stay Connected</h3>
-                <p className="mt-4 text-sm text-muted-foreground">Get the latest deals and appliance tips in your inbox.</p>
+                <p className="mt-4 text-sm text-muted-foreground">Get the latest deals & appliance tips in your inbox.</p>
                 <form className="mt-4 flex w-full max-w-sm items-center space-x-2">
                     <Input type="email" placeholder="Enter your email" className="flex-1"/>
                     <Button type="submit">Subscribe</Button>
@@ -73,7 +73,7 @@ export function Footer() {
             <div className="flex items-center gap-4 mt-4 sm:mt-0">
                <p>Pay securely with</p>
                <div className="flex items-center gap-2">
-                <svg className="h-8 w-auto" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3zM23 18H15V6h8c1.7 0 3 1.3 3 3s-1.3 3-3 3-3 1.3-3 3v3z" opacity=".07"></path><path d="M23 6h-8v12h8c1.7 0 3-1.3 3-3s-1.3-3-3-3-3-1.3-3-3V6z" fill="#fff"></path></svg>
+                <svg className="h-8 w-auto" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" opacity=".07"></path><path d="M23 18H15V6h8c1.7 0 3 1.3 3 3s-1.3 3-3 3-3 1.3-3 3v3z" fill="#fff"></path></svg>
                  <svg className="h-8 w-auto" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" opacity=".07"></path><path d="M12 12c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6zm11.4 0c0-2.8-2-5-4.6-5-.9 0-1.8.3-2.5.8-.7-.5-1.6-.8-2.5-.8-2.6 0-4.7 2.2-4.7 5s2 5 4.6 5c.9 0 1.8-.3 2.5-.8.7.5 1.6.8 2.5.8 2.6 0 4.7-2.2 4.7-5z" fill="#fff"></path><circle cx="18" cy="12" r="5.4" fill="#EB001B"></circle><path d="M12 12c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6zm11.4 0c0-2.8-2-5-4.6-5-.9 0-1.8.3-2.5.8-.7-.5-1.6-.8-2.5-.8-2.6 0-4.7 2.2-4.7 5s2 5 4.6 5c.9 0 1.8-.3 2.5-.8.7.5 1.6.8 2.5.8 2.6 0 4.7-2.2 4.7-5z" fill="#F79E1B"></path></svg>
                  <svg className="h-8 w-auto" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" opacity=".07"></path><path d="M22.6 12.2c0-2.4 1-4 2.8-4s2.8 1.6 2.8 4-1 4-2.8 4-2.8-1.6-2.8-4zm11-3.6c-1.3 0-2.2.6-2.6 1-.2-.3-.5-.5-.8-.5-.8 0-1.3.6-1.3 1.5 0 .8.6 1.2 1.5 1.5.8.3 1 .4 1 .6 0 .2-.3.3-.6.3-.5 0-.8-.2-1-.4l-.2-.1-.2-.5h-1c.1.6.6 1.1 1.4 1.1.9 0 1.6-.5 1.6-1.3 0-.6-.4-.9-1.4-1.3-.8-.3-1-.4-1-.6 0-.2.3-.3.6-.3.4 0 .7.2.8.3l.1.1.2.4h1v-1.6c.2-.1.4-.1.6-.1.6 0 1.1.3 1.1.9zm-22.3.1c0-.5.4-.8 1-.8.6 0 1 .3 1 .8s-.4.8-1 .8c-.6 0-1-.3-1-.8zm-3 0c0-.5.4-.8 1-.8.6 0 1 .3 1 .8s-.4.8-1 .8c-.6 0-1-.3-1-.8zm-3 0c0-.5.4-.8 1-.8.6 0 1 .3 1 .8s-.4.8-1 .8c-.6 0-1-.3-1-.8zm-3 0c0-.5.4-.8 1-.8.6 0 1 .3 1 .8s-.4.8-1 .8c-.6 0-1-.3-1-.8z" fill="#fff"></path></svg>
                </div>
