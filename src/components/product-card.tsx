@@ -60,7 +60,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </Link>
         </CardTitle>
         <div className="mt-2 flex items-center justify-between">
-            <p className="text-xl font-bold text-primary">${product.price.toFixed(2)}</p>
+            <p className="text-xl font-bold text-primary">₹{product.price.toFixed(2)}</p>
             {renderStars(product.rating)}
         </div>
       </CardContent>

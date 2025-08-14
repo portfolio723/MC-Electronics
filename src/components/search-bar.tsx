@@ -23,7 +23,7 @@ interface SearchResult {
   brands: string[];
 }
 
-const SearchInput = ({ query, onQueryChange, onFocus, isMobile = false } : { query: string, onQueryChange: (q: string) => void, onFocus: () => void, isMobile?: boolean}) => {
+const SearchInput = ({ query, onQueryChange, onFocus, isMobile = false } : { query: string, onQueryChange: (e: React.ChangeEvent<HTMLInputElement>) => void, onFocus: () => void, isMobile?: boolean}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const SearchInput = ({ query, onQueryChange, onFocus, isMobile = false } : { que
         placeholder="Search for products, brands..."
         className="w-full rounded-full bg-slate-100 pl-9 focus:bg-background focus:ring-2 focus:ring-primary"
         value={query}
-        onChange={(e) => onQueryChange(e.target.value)}
+        onChange={onQueryChange}
         onFocus={onFocus}
       />
     </div>
@@ -65,7 +65,7 @@ const SearchResultsDropdown = ({ results, query, onLinkClick }: { results: Searc
                   <Image src={product.image} alt={product.name} width={40} height={40} className="rounded" />
                   <div className="flex-1">
                     <p className="font-semibold text-sm">{product.name}</p>
-                    <p className="text-sm text-primary">${product.price.toFixed(2)}</p>
+                    <p className="text-sm text-primary">₹{product.price.toFixed(2)}</p>
                   </div>
                 </Link>
               </li>
@@ -179,7 +179,7 @@ const SearchContainer = ({ isMobile = false } : { isMobile?: boolean }) => {
         <div className="relative w-full" ref={searchRef}>
         <SearchInput 
             query={query} 
-            onQueryChange={setQuery} 
+            onQueryChange={(e) => setQuery(e.target.value)} 
             onFocus={() => setIsFocused(true)}
             isMobile={isMobile}
         />

@@ -36,7 +36,7 @@ export default function CartPage() {
                 <div className="ml-4 flex-1">
                   <h2 className="font-semibold">{item.name}</h2>
                   <p className="text-sm text-muted-foreground">{item.brand}</p>
-                  <p className="font-bold text-primary">${item.price.toFixed(2)}</p>
+                  <p className="font-bold text-primary">₹{item.price.toFixed(2)}</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="flex w-24 items-center">
@@ -44,7 +44,7 @@ export default function CartPage() {
                      <Input type="number" value={item.quantity} readOnly className="h-8 w-10 border-0 bg-transparent text-center focus-visible:ring-0" />
                      <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</Button>
                   </div>
-                  <p className="w-20 text-right font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
+                  <p className="w-20 text-right font-semibold">₹{(item.price * item.quantity).toFixed(2)}</p>
                   <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
                     <Trash2 className="h-5 w-5 text-muted-foreground hover:text-destructive" />
                   </Button>
@@ -60,7 +60,7 @@ export default function CartPage() {
               <CardContent className="space-y-4">
                 <div className="flex justify-between">
                   <span>Subtotal ({cartCount} items)</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+                  <span>₹{cartTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Shipping</span>
@@ -68,7 +68,7 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between font-bold">
                   <span>Total</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+                  <span>₹{cartTotal.toFixed(2)}</span>
                 </div>
               </CardContent>
               <CardFooter>

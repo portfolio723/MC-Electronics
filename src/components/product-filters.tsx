@@ -22,7 +22,7 @@ interface ProductFiltersProps {
 
 export function ProductFilters({ initialProducts }: ProductFiltersProps) {
   const [sortOption, setSortOption] = useState('popularity');
-  const [priceRange, setPriceRange] = useState([0, 2000]);
+  const [priceRange, setPriceRange] = useState([0, 70000]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
 
@@ -82,15 +82,15 @@ export function ProductFilters({ initialProducts }: ProductFiltersProps) {
                   <Label className="font-semibold">Price Range</Label>
                   <Slider
                     min={0}
-                    max={2000}
-                    step={50}
+                    max={70000}
+                    step={1000}
                     value={priceRange}
                     onValueChange={(value) => setPriceRange(value)}
                     className="mt-4"
                   />
                   <div className="mt-2 flex justify-between text-sm text-muted-foreground">
-                    <span>${priceRange[0]}</span>
-                    <span>${priceRange[1]}</span>
+                    <span>₹{priceRange[0]}</span>
+                    <span>₹{priceRange[1]}</span>
                   </div>
                 </div>
 

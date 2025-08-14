@@ -70,7 +70,7 @@ export default function ProductPage({ params }: PageProps) {
                 </div>
             </div>
             
-            <p className="text-3xl font-bold text-primary">${product.price.toFixed(2)}</p>
+            <p className="text-3xl font-bold text-primary">₹{product.price.toFixed(2)}</p>
 
             <ProductDetailsClient product={product} />
             
