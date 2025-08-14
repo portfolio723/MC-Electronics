@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Refrigerator, Zap, Home as HomeIcon, Tv } from 'lucide-react';
+import { Refrigerator, Zap, HomeIcon, Tv, Award, ShieldCheck, Truck } from 'lucide-react';
 import { categories, products } from '@/lib/data';
 import { ProductCard } from '@/components/product-card';
 
@@ -15,6 +15,7 @@ export default function Home() {
 
   const featuredProducts = products.slice(0, 4);
   const mainCategories = categories.filter(c => !c.parent && c.slug !== 'offers');
+  const brands = [...new Set(products.map(p => p.brand))];
 
 
   return (
@@ -65,6 +66,21 @@ export default function Home() {
         </div>
       </section>
 
+       <section className="container mx-auto px-4 md:px-6">
+        <h2 className="font-headline text-center text-3xl font-bold tracking-tight">
+          Shop By Brand
+        </h2>
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {brands.map((brand) => (
+             <Link key={brand} href={`/products/all?brands=${brand}`}>
+                <Card className="group flex h-24 items-center justify-center p-4 transition-all duration-300 hover:bg-accent hover:text-accent-foreground">
+                    <span className="font-headline text-xl font-semibold text-muted-foreground group-hover:text-accent-foreground">{brand}</span>
+                </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="bg-secondary py-16">
         <div className="container mx-auto px-4 text-center md:px-6">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-secondary-foreground">
@@ -76,6 +92,29 @@ export default function Home() {
           <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="/products/all?filter=offers">Explore Deals</Link>
           </Button>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 py-8 md:px-6 md:py-12">
+        <h2 className="font-headline text-center text-3xl font-bold tracking-tight">
+          Why Shop With Us?
+        </h2>
+        <div className="mt-8 grid grid-cols-1 gap-8 text-center md:grid-cols-3">
+            <div className="flex flex-col items-center">
+                <Award className="mb-4 h-12 w-12 text-accent"/>
+                <h3 className="font-headline text-xl font-semibold">Quality Assured</h3>
+                <p className="mt-2 text-muted-foreground">We only source the highest quality appliances from trusted brands.</p>
+            </div>
+            <div className="flex flex-col items-center">
+                <Truck className="mb-4 h-12 w-12 text-accent"/>
+                <h3 className="font-headline text-xl font-semibold">Fast & Free Shipping</h3>
+                <p className="mt-2 text-muted-foreground">Enjoy fast and free delivery on all major appliances, right to your doorstep.</p>
+            </div>
+            <div className="flex flex-col items-center">
+                <ShieldCheck className="mb-4 h-12 w-12 text-accent"/>
+                <h3 className="font-headline text-xl font-semibold">Guaranteed Warranty</h3>
+                <p className="mt-2 text-muted-foreground">Every product comes with a comprehensive manufacturer's warranty.</p>
+            </div>
         </div>
       </section>
     </div>
