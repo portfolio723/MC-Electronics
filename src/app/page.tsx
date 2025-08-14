@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Refrigerator, Zap, HomeIcon, Tv, Award, ShieldCheck, Truck } from 'lucide-react';
 import { categories, products } from '@/lib/data';
 import { ProductCard } from '@/components/product-card';
+import { FlashSaleCountdown } from '@/components/flash-sale-countdown';
 
 export default function Home() {
   const categoryIcons: { [key: string]: React.ElementType } = {
@@ -16,6 +17,10 @@ export default function Home() {
   const featuredProducts = products.slice(0, 4);
   const mainCategories = categories.filter(c => !c.parent && c.slug !== 'offers');
   const brands = [...new Set(products.map(p => p.brand))];
+  
+  // Set a future date for the flash sale countdown
+  const saleEndDate = new Date();
+  saleEndDate.setDate(saleEndDate.getDate() + 3);
 
 
   return (
@@ -81,15 +86,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-secondary py-16">
+      <section className="bg-accent py-16">
         <div className="container mx-auto px-4 text-center md:px-6">
-          <h2 className="font-headline text-3xl font-bold tracking-tight text-secondary-foreground">
+          <h2 className="font-headline text-3xl font-bold tracking-tight text-accent-foreground">
             Festive Sale – Up to 40% Off!
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-xl text-accent-foreground/90">
             Don't miss out on our limited-time offers. Perfect gifts for every home.
           </p>
-          <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
+          <FlashSaleCountdown targetDate={saleEndDate.toISOString()} />
+          <Button asChild size="lg" className="mt-8 bg-background text-foreground hover:bg-background/90">
             <Link href="/products/all?filter=offers">Explore Deals</Link>
           </Button>
         </div>
