@@ -9,6 +9,9 @@ import { Card } from '@/components/ui/card';
 import { Heart, Share2 } from 'lucide-react';
 import { Checkbox } from './ui/checkbox';
 import { Label } from './ui/label';
+import { useWishlist } from '@/hooks/use-wishlist';
+import { useAuth } from '@/hooks/use-auth';
+import { cn } from '@/lib/utils';
 
 interface ProductListItemProps {
   product: Product;
@@ -17,6 +20,20 @@ interface ProductListItemProps {
 export function ProductListItem({ product }: ProductListItemProps) {
     const originalPrice = product.price * 1.2; // Assuming a 20% markup for display
     const discount = Math.round(((originalPrice - product.price) / originalPrice) * 100);
+
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+    const { checkAuthAndExecute } = useAuth();
+    const inWishlist = isInWishlist(product.id);
+
+    const handleWishlistClick = () => {
+        checkAuthAndExecute(() => {
+            if (inWishlist) {
+                removeFromWishlist(product.id);
+            } else {
+                addToWishlist(product);
+            }
+        });
+    };
 
   return (
     <Card className="flex w-full flex-col items-center gap-4 p-4 transition-shadow duration-300 hover:shadow-lg md:flex-row">
@@ -55,8 +72,8 @@ export function ProductListItem({ product }: ProductListItemProps) {
         </div>
       </div>
       <div className="flex w-full flex-col items-end justify-between md:w-auto">
-         <Button variant="ghost" size="icon">
-            <Heart className="h-6 w-6" />
+         <Button variant="ghost" size="icon" onClick={handleWishlistClick}>
+            <Heart className={cn("h-6 w-6", inWishlist && "fill-destructive text-destructive")} />
          </Button>
       </div>
     </Card>

@@ -1,8 +1,15 @@
+
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { useWishlist } from '@/hooks/use-wishlist';
+import { ProductCard } from '@/components/product-card';
 
 export default function AccountPage() {
+  const { wishlistItems } = useWishlist();
+
   return (
     <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
       <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl">My Account</h1>
@@ -37,7 +44,15 @@ export default function AccountPage() {
               <CardDescription>Your saved items for later.</CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="text-muted-foreground">Your wishlist is empty.</p>
+                {wishlistItems.length === 0 ? (
+                    <p className="text-muted-foreground">Your wishlist is empty.</p>
+                ) : (
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {wishlistItems.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+                    </div>
+                )}
             </CardContent>
           </Card>
            <Separator className="my-8" />

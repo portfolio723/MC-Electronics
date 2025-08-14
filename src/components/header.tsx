@@ -31,6 +31,7 @@ import type { Category } from '@/lib/types';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { SearchBar } from './search-bar';
+import { useWishlist } from '@/hooks/use-wishlist';
 
 const mainNav: { title: string; href: string; type: 'link' | 'dropdown', slug?: string }[] = [
     { title: 'Home', href: '/', type: 'link' },
@@ -47,6 +48,7 @@ const supportNav: { title: string; href: string; }[] = [
 
 export function Header() {
   const { cartCount } = useCart();
+  const { wishlistCount } = useWishlist();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -165,8 +167,16 @@ export function Header() {
              <Button variant="ghost" size="icon" asChild>
                 <Link href="/login"><User className="h-5 w-5" /><span className="sr-only">Login</span></Link>
             </Button>
-            <Button variant="ghost" size="icon" asChild>
-                <Link href="/account"><Heart className="h-5 w-5" /><span className="sr-only">Wishlist</span></Link>
+            <Button variant="ghost" size="icon" className="relative" asChild>
+                <Link href="/account">
+                    <Heart className="h-5 w-5" />
+                    {wishlistCount > 0 && (
+                      <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
+                        {wishlistCount}
+                      </Badge>
+                    )}
+                    <span className="sr-only">Wishlist</span>
+                </Link>
             </Button>
             <Button variant="ghost" size="icon" className="relative" asChild>
               <Link href="/cart">
@@ -180,6 +190,18 @@ export function Header() {
               </Link>
             </Button>
           </div>
+
+           <Button variant="ghost" size="icon" className="relative md:hidden" asChild>
+                <Link href="/account">
+                    <Heart className="h-5 w-5" />
+                    {wishlistCount > 0 && (
+                      <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
+                        {wishlistCount}
+                      </Badge>
+                    )}
+                    <span className="sr-only">Wishlist</span>
+                </Link>
+            </Button>
 
           <Button variant="ghost" size="icon" className="relative md:hidden" asChild>
               <Link href="/cart">
