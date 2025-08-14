@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCart } from '@/hooks/use-cart';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
@@ -43,7 +43,7 @@ export default function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
   const { toast } = useToast();
   const router = useRouter();
-  const [checkoutStep, setCheckoutStep] = useState<'auth' | 'shipping' | 'payment'>('auth');
+  const [checkoutStep, setCheckoutStep] = useState<'shipping' | 'payment'>('shipping');
 
 
   const form = useForm<z.infer<typeof checkoutFormSchema>>({
@@ -74,11 +74,11 @@ export default function CheckoutPage() {
     )
   }
 
-  const renderAuthStep = () => (
+  const renderGuestAuthStep = () => (
     <Card className="mx-auto max-w-lg">
       <CardHeader>
         <CardTitle className="text-2xl font-headline">Checkout as Guest or Login</CardTitle>
-        <CardDescription>Sign in for a faster checkout experience.</CardDescription>
+        <CardDescription>Have an account? Sign in for a faster experience.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <Button className="w-full" onClick={() => setCheckoutStep('shipping')}>Continue as Guest</Button>
@@ -87,23 +87,10 @@ export default function CheckoutPage() {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">Or</span>
+            <span className="bg-background px-2 text-muted-foreground">Or sign in</span>
           </div>
         </div>
-         <Form {...form}>
-            <form className="space-y-4">
-               <FormField control={form.control} name="email" render={({ field }) => (
-                    <FormItem><FormLabel>Email</FormLabel><FormControl><Input placeholder="m@example.com" {...field} /></FormControl><FormMessage /></FormItem>
-                )} />
-                 <FormField control={form.control} name="password" render={({ field }) => (
-                    <FormItem><FormLabel>Password</FormLabel><FormControl><Input type="password" {...field} /></FormControl><FormMessage /></FormItem>
-                )} />
-                <Button type="submit" className="w-full" onClick={() => {
-                  // Mock login action
-                  setCheckoutStep('shipping');
-                }}>Login</Button>
-            </form>
-         </Form>
+         <Button variant="outline" className="w-full" onClick={() => router.push('/login')}>Login</Button>
          <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{' '}
             <Link href="#" className="underline">Sign up</Link>
@@ -112,16 +99,14 @@ export default function CheckoutPage() {
     </Card>
   );
 
+
   const renderShippingAndPayment = () => (
      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <Card>
               <CardHeader>
-                <div className="flex items-center justify-between">
-                    <CardTitle>Shipping Information</CardTitle>
-                    <Button variant="link" onClick={() => setCheckoutStep('auth')}>Back</Button>
-                </div>
+                <CardTitle>Shipping Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <FormField control={form.control} name="name" render={({ field }) => (
@@ -188,11 +173,10 @@ export default function CheckoutPage() {
       </div>
   );
 
-
   return (
     <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
       <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl text-center">Checkout</h1>
-      {checkoutStep === 'auth' ? renderAuthStep() : renderShippingAndPayment()}
+      {renderShippingAndPayment()}
     </div>
   );
 }
