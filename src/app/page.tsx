@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Refrigerator, Zap, HomeIcon, Tv, Award, ShieldCheck, Truck } from 'lucide-react';
@@ -21,6 +22,27 @@ export default function Home() {
   // Set a future date for the flash sale countdown
   const saleEndDate = new Date();
   saleEndDate.setDate(saleEndDate.getDate() + 3);
+
+  const shopByNeed = [
+    {
+      title: 'Kitchen Essentials',
+      href: '/products/small-appliances',
+      image: 'https://placehold.co/600x400.png',
+      hint: 'modern kitchen',
+    },
+    {
+      title: 'Smart Home Upgrade',
+      href: '/products/smart-home',
+      image: 'https://placehold.co/600x400.png',
+      hint: 'smart home technology',
+    },
+    {
+      title: 'Entertainment Hub',
+      href: '/products/entertainment',
+      image: 'https://placehold.co/600x400.png',
+      hint: 'living room entertainment',
+    },
+  ];
 
 
   return (
@@ -57,6 +79,36 @@ export default function Home() {
               </Link>
             );
           })}
+        </div>
+      </section>
+      
+      <section className="container mx-auto px-4 md:px-6">
+        <h2 className="font-headline text-center text-3xl font-bold tracking-tight">
+          Shop by Need
+        </h2>
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {shopByNeed.map((need) => (
+            <Link key={need.title} href={need.href}>
+              <Card className="group overflow-hidden rounded-lg">
+                <div className="relative h-64 w-full">
+                  <Image
+                    src={need.image}
+                    alt={need.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="transition-transform duration-300 group-hover:scale-105"
+                    data-ai-hint={need.hint}
+                  />
+                  <div className="absolute inset-0 bg-black/40" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <h3 className="font-headline text-2xl font-bold text-white">
+                      {need.title}
+                    </h3>
+                  </div>
+                </div>
+              </Card>
+            </Link>
+          ))}
         </div>
       </section>
 
