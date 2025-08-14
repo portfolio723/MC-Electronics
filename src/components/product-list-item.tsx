@@ -6,7 +6,7 @@ import Link from 'next/link';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Bookmark, Share2 } from 'lucide-react';
+import { Heart, Share2 } from 'lucide-react';
 import { Checkbox } from './ui/checkbox';
 import { Label } from './ui/label';
 
@@ -56,7 +56,7 @@ export function ProductListItem({ product }: ProductListItemProps) {
       </div>
       <div className="flex w-full flex-col items-end justify-between md:w-auto">
          <Button variant="ghost" size="icon">
-            <Bookmark className="h-6 w-6" />
+            <Heart className="h-6 w-6" />
          </Button>
       </div>
     </Card>
