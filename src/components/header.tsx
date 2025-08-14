@@ -59,7 +59,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center px-4 md:px-6">
         <Link href="/" className="mr-6 flex items-center gap-2">
           <Zap className="h-6 w-6 text-primary" />
-          <span className="font-headline text-xl font-bold">ApplianceVerse</span>
+          <span className="font-headline text-xl font-bold">ElectroHive</span>
         </Link>
         <nav className="hidden gap-6 md:flex">
           <NavLinks />
@@ -127,7 +127,7 @@ export function Header() {
                 <div className="flex items-center justify-between border-b pb-4">
                    <Link href="/" className="mr-6 flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                       <Zap className="h-6 w-6 text-primary" />
-                      <span className="font-headline text-xl font-bold">ApplianceVerse</span>
+                      <span className="font-headline text-xl font-bold">ElectroHive</span>
                     </Link>
                     <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
                       <X className="h-5 w-5" />

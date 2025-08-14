@@ -10,10 +10,10 @@ export function Footer() {
           <div className="flex flex-col items-start">
              <Link href="/" className="mb-4 flex items-center gap-2">
                 <Zap className="h-6 w-6 text-primary" />
-                <span className="font-headline text-xl font-bold">ApplianceVerse</span>
+                <span className="font-headline text-xl font-bold">ElectroHive</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Your one-stop shop for premium home electronics.
+              Smart Living, Made Simple.
             </p>
           </div>
           <div>
@@ -38,7 +38,7 @@ export function Footer() {
             <h3 className="font-headline font-semibold">Contact Us</h3>
             <address className="mt-4 not-italic text-sm text-muted-foreground">
               <p>123 Tech Street, Silicon Valley, 94001</p>
-              <p>Email: <a href="mailto:support@applianceverse.com" className="hover:text-primary">support@applianceverse.com</a></p>
+              <p>Email: <a href="mailto:support@electrohive.com" className="hover:text-primary">support@electrohive.com</a></p>
               <p>Phone: <a href="tel:+1234567890" className="hover:text-primary">+1 (234) 567-890</a></p>
             </address>
             <div className="mt-4 flex space-x-2">
@@ -49,7 +49,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t pt-4 text-center text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} ApplianceVerse. All Rights Reserved.
+          &copy; {new Date().getFullYear()} ElectroHive. All Rights Reserved.
         </div>
       </div>
     </footer>
