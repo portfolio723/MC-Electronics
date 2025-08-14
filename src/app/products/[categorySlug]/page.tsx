@@ -15,7 +15,7 @@ export default function CategoryPage({ params }: PageProps) {
   const { categorySlug } = params;
   const searchParams = useSearchParams();
 
-  const category = categories.find((c) => c.slug === categorySlug);
+  const category = useMemo(() => categories.find((c) => c.slug === categorySlug), [categorySlug]);
   const subcategories = useMemo(() => categories.filter(c => c.parent === categorySlug), [categorySlug]);
   
   const initialProducts = useMemo(() => {
