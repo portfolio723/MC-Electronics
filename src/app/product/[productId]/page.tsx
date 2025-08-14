@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { products } from '@/lib/data';
+import { products, categories } from '@/lib/data';
 import { Star, StarHalf, ShieldCheck, Truck, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -35,6 +35,10 @@ export default function ProductPage({ params }: PageProps) {
   if (!product) {
     notFound();
   }
+  
+  const productCategory = categories.find(c => c.slug === product.category);
+  const mainCategory = categories.find(c => c.slug === productCategory?.parent);
+  const categoryName = mainCategory ? mainCategory.name : 'Products';
 
   return (
     <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
@@ -46,7 +50,7 @@ export default function ProductPage({ params }: PageProps) {
               width={800}
               height={800}
               className="aspect-square w-full rounded-lg border object-cover"
-              data-ai-hint={`${product.category.split('-')[0] ?? ''} ${product.category.split('-')[1] ?? ''}`}
+              data-ai-hint={`${categoryName} appliance`}
             />
             <div className="hidden grid-cols-4 gap-4 md:grid">
                 {product.images.slice(0,4).map((img, i) => (

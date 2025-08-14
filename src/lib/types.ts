@@ -3,7 +3,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  category: string;
+  category: string; // This will now be a subcategory slug
   brand: string;
   rating: number;
   stock: number;
@@ -18,6 +18,7 @@ export interface Category {
   id: string;
   name: string;
   slug: string;
+  parent?: string; // Slug of the parent category
 }
 
 export interface CartItem extends Product {

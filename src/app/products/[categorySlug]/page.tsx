@@ -24,12 +24,25 @@ interface PageProps {
 export default function CategoryPage({ params }: PageProps) {
   const { categorySlug } = params;
 
-  const category = categories.find((c) => c.slug === categorySlug) || { name: 'All Products' };
+  const category = categories.find((c) => c.slug === categorySlug);
+  const subcategories = useMemo(() => categories.filter(c => c.parent === categorySlug), [categorySlug]);
+  const allCategorySlugs = useMemo(() => [categorySlug, ...subcategories.map(s => s.slug)], [categorySlug, subcategories]);
 
-  const initialProducts =
-    categorySlug === 'all'
-      ? products
-      : products.filter((p) => p.category === categorySlug);
+  const initialProducts = useMemo(() => {
+    if (categorySlug === 'all') {
+      return products;
+    }
+    // If it's a parent category, get all products from its subcategories
+    if (subcategories.length > 0) {
+        return products.filter(p => {
+            const productCategory = categories.find(c => c.slug === p.category);
+            return productCategory?.parent === categorySlug;
+        });
+    }
+    // It's a subcategory
+    return products.filter((p) => p.category === categorySlug);
+  }, [categorySlug, subcategories]);
+
 
   const [sortOption, setSortOption] = useState('popularity');
   const [priceRange, setPriceRange] = useState([0, 1500]);
@@ -83,7 +96,7 @@ export default function CategoryPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-8 md:px-6">
       <header className="mb-8">
         <h1 className="font-headline text-4xl font-bold tracking-tight">
-          {category.name}
+          {category?.name || "All Products"}
         </h1>
         <p className="mt-2 text-muted-foreground">
           Browse and find the perfect appliance for your home.

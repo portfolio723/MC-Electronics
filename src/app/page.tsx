@@ -14,6 +14,8 @@ export default function Home() {
   };
 
   const featuredProducts = products.slice(0, 4);
+  const mainCategories = categories.filter(c => !c.parent);
+
 
   return (
     <div className="space-y-12 md:space-y-16 lg:space-y-20">
@@ -36,7 +38,7 @@ export default function Home() {
           Featured Categories
         </h2>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-          {categories.map((category) => {
+          {mainCategories.map((category) => {
             const Icon = categoryIcons[category.slug] || Refrigerator;
             return (
               <Link key={category.id} href={`/products/${category.slug}`}>

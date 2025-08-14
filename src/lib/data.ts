@@ -1,10 +1,40 @@
 import type { Category, Product } from '@/lib/types';
 
 export const categories: Category[] = [
-  { id: '1', name: 'Large Appliances', slug: 'large-appliances' },
-  { id: '2', name: 'Small Appliances', slug: 'small-appliances' },
-  { id: '3', name: 'Smart Home', slug: 'smart-home' },
-  { id: '4', name: 'Entertainment', slug: 'entertainment' },
+  // Main Categories
+  { id: 'cat-1', name: 'Large Appliances', slug: 'large-appliances' },
+  { id: 'cat-2', name: 'Small Appliances', slug: 'small-appliances' },
+  { id: 'cat-3', name: 'Smart Home', slug: 'smart-home' },
+  { id: 'cat-4', name: 'Entertainment', slug: 'entertainment' },
+  { id: 'cat-5', name: 'Offers', slug: 'offers'},
+
+  // Subcategories for Large Appliances
+  { id: 'sub-1-1', name: 'Refrigerators', slug: 'refrigerators', parent: 'large-appliances' },
+  { id: 'sub-1-2', name: 'Washing Machines', slug: 'washing-machines', parent: 'large-appliances' },
+  { id: 'sub-1-3', name: 'Air Conditioners', slug: 'air-conditioners', parent: 'large-appliances' },
+  { id: 'sub-1-4', name: 'Ovens & Microwaves', slug: 'ovens-microwaves', parent: 'large-appliances' },
+
+  // Subcategories for Small Appliances
+  { id: 'sub-2-1', name: 'Mixer & Grinder', slug: 'mixer-grinder', parent: 'small-appliances' },
+  { id: 'sub-2-2', name: 'Air Fryers', slug: 'air-fryers', parent: 'small-appliances' },
+  { id: 'sub-2-3', name: 'Vacuum Cleaners', slug: 'vacuum-cleaners', parent: 'small-appliances' },
+  { id: 'sub-2-4', name: 'Water Purifiers', slug: 'water-purifiers', parent: 'small-appliances' },
+  { id: 'sub-2-5', name: 'Irons & Garment Steamers', slug: 'irons-steamers', parent: 'small-appliances' },
+  
+  // Subcategories for Smart Home
+  { id: 'sub-3-1', name: 'Smart Refrigerators', slug: 'smart-refrigerators', parent: 'smart-home' },
+  { id: 'sub-3-2', name: 'Smart ACs', slug: 'smart-acs', parent: 'smart-home' },
+  { id: 'sub-3-3', name: 'Security Cameras', slug: 'security-cameras', parent: 'smart-home' },
+
+  // Subcategories for Entertainment
+  { id: 'sub-4-1', name: 'Smart TVs', slug: 'smart-tvs', parent: 'entertainment' },
+  { id: 'sub-4-2', name: 'Soundbars & Speakers', slug: 'soundbars-speakers', parent: 'entertainment' },
+  { id: 'sub-4-3', name: 'Streaming Devices', slug: 'streaming-devices', parent: 'entertainment' },
+  
+  // Subcategories for Offers
+  { id: 'sub-5-1', name: 'Festive Sale', slug: 'festive-sale', parent: 'offers' },
+  { id: 'sub-5-2', name: 'Clearance Deals', slug: 'clearance-deals', parent: 'offers' },
+  { id: 'sub-5-3', name: 'Bundle Discounts', slug: 'bundle-discounts', parent: 'offers' },
 ];
 
 export const products: Product[] = [
@@ -13,7 +43,7 @@ export const products: Product[] = [
     name: 'Aura Smart Refrigerator',
     description: 'A 300L smart refrigerator with a touch screen, voice assistant compatibility, and automatic temperature control. Keeps your food fresh and your kitchen smart.',
     price: 1299.99,
-    category: 'large-appliances',
+    category: 'refrigerators',
     brand: 'Aura',
     rating: 4.8,
     stock: 15,
@@ -28,7 +58,7 @@ export const products: Product[] = [
     name: 'QuantumClean Washing Machine',
     description: 'A 8kg fully automatic front-load washing machine featuring 15 wash programs, steam cycle for hygiene, and a silent, efficient digital inverter motor.',
     price: 799.0,
-    category: 'large-appliances',
+    category: 'washing-machines',
     brand: 'Quantum',
     rating: 4.6,
     stock: 25,
@@ -43,7 +73,7 @@ export const products: Product[] = [
     name: 'Vortex Pro Air Fryer',
     description: 'A 5.5L digital air fryer that lets you fry, roast, bake, and grill with 95% less oil. Quick, healthy, and delicious meals are just a touch away.',
     price: 149.99,
-    category: 'small-appliances',
+    category: 'air-fryers',
     brand: 'Vortex',
     rating: 4.9,
     stock: 150,
@@ -58,7 +88,7 @@ export const products: Product[] = [
     name: 'PureFlow Water Purifier',
     description: 'Advanced 7-stage RO+UV+UF water purifier that removes impurities, retains essential minerals, and provides 100% safe and pure drinking water.',
     price: 220.5,
-    category: 'small-appliances',
+    category: 'water-purifiers',
     brand: 'PureFlow',
     rating: 4.7,
     stock: 80,
@@ -73,7 +103,7 @@ export const products: Product[] = [
     name: 'EchoView 4K Smart TV',
     description: 'A 55-inch 4K UHD Smart LED TV with HDR10+, Dolby Atmos sound, and a built-in streaming platform. Experience cinematic visuals from your couch.',
     price: 999.99,
-    category: 'entertainment',
+    category: 'smart-tvs',
     brand: 'EchoView',
     rating: 4.8,
     stock: 40,
@@ -88,7 +118,7 @@ export const products: Product[] = [
     name: 'CineBar 5.1 Soundbar',
     description: 'A 5.1 channel soundbar with a wireless subwoofer and rear speakers. Delivers immersive, room-filling surround sound for movies, music, and games.',
     price: 450.0,
-    category: 'entertainment',
+    category: 'soundbars-speakers',
     brand: 'CineBar',
     rating: 4.5,
     stock: 60,
@@ -118,7 +148,7 @@ export const products: Product[] = [
     name: 'SecureEye 360 Cam',
     description: 'An AI-powered indoor security camera with 360-degree pan-tilt-zoom, night vision, and two-way audio. Keep an eye on your home from anywhere.',
     price: 89.99,
-    category: 'smart-home',
+    category: 'security-cameras',
     brand: 'SecureEye',
     rating: 4.7,
     stock: 200,

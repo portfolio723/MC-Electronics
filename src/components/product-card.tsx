@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Product } from '@/lib/types';
 import { useCart } from '@/hooks/use-cart';
+import { categories } from '@/lib/data';
 
 interface ProductCardProps {
   product: Product;
@@ -14,6 +15,10 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
+  
+  const productCategory = categories.find(c => c.slug === product.category);
+  const mainCategory = categories.find(c => c.slug === productCategory?.parent);
+  const categoryName = mainCategory ? mainCategory.name.toLowerCase().replace(' appliances', '') : 'product';
 
   const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
@@ -43,7 +48,7 @@ export function ProductCard({ product }: ProductCardProps) {
             width={600}
             height={600}
             className="aspect-square w-full object-cover"
-            data-ai-hint={`${product.category.split('-')[0] ?? ''} ${product.category.split('-')[1] ?? ''}`}
+            data-ai-hint={`${categoryName} ${product.brand}`}
           />
         </Link>
       </CardHeader>
