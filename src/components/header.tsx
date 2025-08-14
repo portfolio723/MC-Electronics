@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -128,7 +129,7 @@ export function Header() {
           <SheetContent side="left" className="flex w-full max-w-sm flex-col p-0">
              <div className="flex h-16 items-center justify-between border-b px-4">
                <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12V2H19V12"/><path d="M19 12L12 20L5 12"/><path d="M9 12V21H15V12"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
                   <span className="font-headline text-xl font-bold">ElectroHive</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
@@ -152,7 +153,7 @@ export function Header() {
         
         {/* Logo */}
         <Link href="/" className="hidden md:flex items-center gap-2 mr-6">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12V2H19V12"/><path d="M19 12L12 20L5 12"/><path d="M9 12V21H15V12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
           <span className="font-headline text-2xl font-bold">ElectroHive</span>
         </Link>
         

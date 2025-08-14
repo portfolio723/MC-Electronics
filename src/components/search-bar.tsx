@@ -32,7 +32,6 @@ export function SearchBar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Close search results when navigating
     setQuery('');
     setIsFocused(false);
     setMobileModalOpen(false);
@@ -67,7 +66,11 @@ export function SearchBar() {
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      performSearch(query);
+      if (query) {
+        performSearch(query);
+      } else {
+        setResults({ products: [], categories: [], brands: [] });
+      }
     }, 200);
 
     return () => {
@@ -86,7 +89,7 @@ export function SearchBar() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
+  
   const SearchResultsDropdown = () => {
     const hasResults = results.products.length > 0 || results.categories.length > 0 || results.brands.length > 0;
     if (!query || !hasResults) return null;
@@ -148,8 +151,8 @@ export function SearchBar() {
       <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
       <Input
         type="search"
-        placeholder="Search products, brands..."
-        className="w-full rounded-full bg-secondary pl-9 focus:bg-background focus:ring-2 focus:ring-primary"
+        placeholder="Search for products, brands..."
+        className="w-full rounded-full bg-slate-100 pl-9 focus:bg-background focus:ring-2 focus:ring-primary"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => setIsFocused(true)}
@@ -175,7 +178,7 @@ export function SearchBar() {
                     <span className="sr-only">Search</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="p-4 top-0 translate-y-0 sm:top-1/2 sm:-translate-y-1/2 h-screen sm:h-auto overflow-y-auto">
+            <DialogContent className="p-4 top-0 translate-y-0 sm:top-[10%] sm:-translate-y-[10%] h-auto max-h-[80vh] overflow-y-auto">
                  <SearchInputComponent isMobile={true} />
             </DialogContent>
         </Dialog>
