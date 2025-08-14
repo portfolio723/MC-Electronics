@@ -3,7 +3,6 @@
 import { useMemo } from 'react';
 import { products, categories } from '@/lib/data';
 import type { Product } from '@/lib/types';
-import { ProductCard } from '@/components/product-card';
 import { ProductFilters } from '@/components/product-filters';
 import { useSearchParams } from 'next/navigation';
 
