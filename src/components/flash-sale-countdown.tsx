@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,7 +7,6 @@ interface CountdownProps {
   targetDate: string;
 }
 
-// This function needs to be outside the component to be callable in useState initialization
 const calculateTimeLeft = (targetDate: string) => {
   const difference = +new Date(targetDate) - +new Date();
   let timeLeft = {
@@ -29,10 +29,17 @@ const calculateTimeLeft = (targetDate: string) => {
 };
 
 export function FlashSaleCountdown({ targetDate }: CountdownProps) {
-  const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Don't run timeout if the countdown is over
+    setIsClient(true);
+    setTimeLeft(calculateTimeLeft(targetDate));
+  }, [targetDate]);
+
+  useEffect(() => {
+    if (!isClient) return;
+
     if (timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0) {
       return;
     }
@@ -41,17 +48,14 @@ export function FlashSaleCountdown({ targetDate }: CountdownProps) {
       setTimeLeft(calculateTimeLeft(targetDate));
     }, 1000);
 
-    // Clear timeout on component unmount
     return () => clearTimeout(timer);
-  }, [timeLeft, targetDate]);
+  }, [timeLeft, targetDate, isClient]);
 
+  if (!isClient) {
+     return null;
+  }
 
-  const timerComponents = Object.keys(timeLeft).map((interval) => {
-    const value = timeLeft[interval as keyof typeof timeLeft];
-    if (value === undefined) {
-      return null;
-    }
-
+  const timerComponents = Object.entries(timeLeft).map(([interval, value]) => {
     return (
       <div key={interval} className="flex flex-col items-center">
         <div className="text-2xl font-bold md:text-4xl text-accent-foreground tabular-nums">
