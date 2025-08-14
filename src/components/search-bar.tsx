@@ -49,7 +49,7 @@ const SearchInput = ({ query, onQueryChange, onFocus, isMobile = false } : { que
 };
 
 
-const SearchResultsDropdown = ({ results, query }: { results: SearchResult, query: string }) => {
+const SearchResultsDropdown = ({ results, query, onLinkClick }: { results: SearchResult, query: string, onLinkClick: () => void }) => {
   const hasResults = results.products.length > 0 || results.categories.length > 0 || results.brands.length > 0;
   if (!query || !hasResults) return null;
 
@@ -61,7 +61,7 @@ const SearchResultsDropdown = ({ results, query }: { results: SearchResult, quer
           <ul>
             {results.products.map(product => (
               <li key={product.id}>
-                <Link href={`/product/${product.id}`} className="flex items-center gap-4 rounded-md p-2 hover:bg-secondary">
+                <Link href={`/product/${product.id}`} className="flex items-center gap-4 rounded-md p-2 hover:bg-secondary" onClick={onLinkClick}>
                   <Image src={product.image} alt={product.name} width={40} height={40} className="rounded" />
                   <div className="flex-1">
                     <p className="font-semibold text-sm">{product.name}</p>
@@ -79,7 +79,7 @@ const SearchResultsDropdown = ({ results, query }: { results: SearchResult, quer
            <ul>
             {results.categories.map(cat => (
               <li key={cat.id}>
-                <Link href={`/products/${cat.slug}`} className="block rounded-md p-2 text-sm hover:bg-secondary">
+                <Link href={`/products/${cat.slug}`} className="block rounded-md p-2 text-sm hover:bg-secondary" onClick={onLinkClick}>
                   {cat.name}
                 </Link>
               </li>
@@ -93,7 +93,7 @@ const SearchResultsDropdown = ({ results, query }: { results: SearchResult, quer
           <ul>
             {results.brands.map(brand => (
               <li key={brand}>
-                <Link href={`/products/all?brands=${brand}`} className="block rounded-md p-2 text-sm hover:bg-secondary">
+                <Link href={`/products/all?brands=${brand}`} className="block rounded-md p-2 text-sm hover:bg-secondary" onClick={onLinkClick}>
                   {brand}
                 </Link>
               </li>
@@ -105,94 +105,104 @@ const SearchResultsDropdown = ({ results, query }: { results: SearchResult, quer
   );
 }
 
+const SearchContainer = ({ isMobile = false } : { isMobile?: boolean }) => {
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState<SearchResult>({ products: [], categories: [], brands: [] });
+    const [isFocused, setIsFocused] = useState(false);
+    const searchRef = useRef<HTMLDivElement>(null);
+    const pathname = usePathname();
+
+    const clearSearch = useCallback(() => {
+        setQuery('');
+        setIsFocused(false);
+    },[]);
+
+    useEffect(() => {
+        clearSearch();
+    }, [pathname, clearSearch]);
+
+
+    const performSearch = useCallback((currentQuery: string) => {
+        if (currentQuery.length < 2) {
+        setResults({ products: [], categories: [], brands: [] });
+        return;
+        }
+
+        const lowerCaseQuery = currentQuery.toLowerCase();
+        
+        const filteredProducts = products
+        .filter(p => 
+            p.name.toLowerCase().includes(lowerCaseQuery) || 
+            p.description.toLowerCase().includes(lowerCaseQuery)
+        )
+        .slice(0, 5);
+        
+        const filteredCategories = categories
+        .filter(c => c.name.toLowerCase().includes(lowerCaseQuery) && c.parent)
+        .slice(0, 3);
+        
+        const filteredBrands = [...new Set(products
+        .filter(p => p.brand.toLowerCase().includes(lowerCaseQuery))
+        .map(p => p.brand))]
+        .slice(0, 3);
+
+        setResults({ products: filteredProducts, categories: filteredCategories, brands: filteredBrands });
+    }, []);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+        if (query) {
+            performSearch(query);
+        } else {
+            setResults({ products: [], categories: [], brands: [] });
+        }
+        }, 200);
+
+        return () => {
+        clearTimeout(handler);
+        };
+    }, [query, performSearch]);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+        if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+            setIsFocused(false);
+        }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    return (
+        <div className="relative w-full" ref={searchRef}>
+        <SearchInput 
+            query={query} 
+            onQueryChange={setQuery} 
+            onFocus={() => setIsFocused(true)}
+            isMobile={isMobile}
+        />
+        {isFocused && <SearchResultsDropdown results={results} query={query} onLinkClick={clearSearch} />}
+        </div>
+    );
+};
+
 
 export function SearchBar() {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchResult>({ products: [], categories: [], brands: [] });
-  const [isFocused, setIsFocused] = useState(false);
   const [isMobileModalOpen, setMobileModalOpen] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    setQuery('');
-    setIsFocused(false);
     setMobileModalOpen(false);
-  }, [pathname]);
+  },[pathname]);
 
-  const performSearch = useCallback((currentQuery: string) => {
-    if (currentQuery.length < 2) {
-      setResults({ products: [], categories: [], brands: [] });
-      return;
-    }
-
-    const lowerCaseQuery = currentQuery.toLowerCase();
-    
-    const filteredProducts = products
-      .filter(p => 
-        p.name.toLowerCase().includes(lowerCaseQuery) || 
-        p.description.toLowerCase().includes(lowerCaseQuery)
-      )
-      .slice(0, 5);
-      
-    const filteredCategories = categories
-      .filter(c => c.name.toLowerCase().includes(lowerCaseQuery) && c.parent)
-      .slice(0, 3);
-      
-    const filteredBrands = [...new Set(products
-      .filter(p => p.brand.toLowerCase().includes(lowerCaseQuery))
-      .map(p => p.brand))]
-      .slice(0, 3);
-
-    setResults({ products: filteredProducts, categories: filteredCategories, brands: filteredBrands });
-  }, []);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      if (query) {
-        performSearch(query);
-      } else {
-        setResults({ products: [], categories: [], brands: [] });
-      }
-    }, 200);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [query, performSearch]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setIsFocused(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-  
-  const SearchContainer = ({ isMobile = false } : { isMobile?: boolean }) => (
-    <div className="relative w-full" ref={isMobile ? null : searchRef}>
-      <SearchInput 
-        query={query} 
-        onQueryChange={setQuery} 
-        onFocus={() => setIsFocused(true)}
-        isMobile={isMobile}
-      />
-      {isFocused && !isMobile && <SearchResultsDropdown results={results} query={query} />}
-      {isMobile && <SearchResultsDropdown results={results} query={query} />}
-    </div>
-  );
 
   return (
     <>
       {/* Desktop Search */}
       <div className="hidden md:block w-full">
-        <div ref={searchRef}>
-          <SearchContainer />
-        </div>
+         <SearchContainer />
       </div>
 
       {/* Mobile Search */}
