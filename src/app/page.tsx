@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Refrigerator, Zap, SmartHome, Tv } from 'lucide-react';
+import { Refrigerator, Zap, Home as HomeIcon, Tv } from 'lucide-react';
 import { categories, products } from '@/lib/data';
 import { ProductCard } from '@/components/product-card';
 
@@ -9,7 +9,7 @@ export default function Home() {
   const categoryIcons: { [key: string]: React.ElementType } = {
     'large-appliances': Refrigerator,
     'small-appliances': Zap,
-    'smart-home': SmartHome,
+    'smart-home': HomeIcon,
     'entertainment': Tv,
   };
 

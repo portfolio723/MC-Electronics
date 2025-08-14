@@ -8,7 +8,7 @@ import {
   ShoppingCart,
   User,
   Zap,
-  SmartHome,
+  Home,
   Tv,
   X,
 } from 'lucide-react';
@@ -31,7 +31,7 @@ import React from 'react';
 const categoryIcons: { [key: string]: React.ElementType } = {
   'large-appliances': Refrigerator,
   'small-appliances': Zap,
-  'smart-home': SmartHome,
+  'smart-home': Home,
   'entertainment': Tv,
 };
 
