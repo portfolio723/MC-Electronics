@@ -41,11 +41,6 @@ const mainNav: { title: string; href: string; type: 'link' | 'dropdown', slug?: 
     { title: 'Entertainment', href: '/products/entertainment', type: 'dropdown', slug: 'entertainment' },
 ];
 
-const supportNav: { title: string; href: string; }[] = [
-  { title: 'Contact Us', href: '/contact'},
-  { title: 'FAQs', href: '/faq'},
-];
-
 export function Header() {
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
@@ -138,9 +133,13 @@ export function Header() {
                 </Button>
             </div>
             <div className="flex-1 overflow-y-auto p-4">
-              <nav className="flex flex-col gap-4">
+               <nav className="flex flex-col gap-4">
                 <NavMenu isMobile={true} />
               </nav>
+              <div className="mt-6 flex flex-col gap-4">
+                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="font-semibold text-foreground transition-colors hover:text-primary">Contact Us</Link>
+                  <Link href="/faq" onClick={() => setMobileMenuOpen(false)} className="font-semibold text-foreground transition-colors hover:text-primary">FAQs</Link>
+              </div>
             </div>
           </SheetContent>
         </Sheet>
@@ -167,8 +166,8 @@ export function Header() {
              <Button variant="ghost" size="icon" asChild>
                 <Link href="/login"><User className="h-5 w-5" /><span className="sr-only">Login</span></Link>
             </Button>
-            <Button variant="ghost" size="icon" className="relative" asChild>
-                <Link href="/account">
+            <Link href="/account" passHref>
+                <Button variant="ghost" size="icon" className="relative">
                     <Heart className="h-5 w-5" />
                     {wishlistCount > 0 && (
                       <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
@@ -176,8 +175,8 @@ export function Header() {
                       </Badge>
                     )}
                     <span className="sr-only">Wishlist</span>
-                </Link>
-            </Button>
+                </Button>
+            </Link>
             <Button variant="ghost" size="icon" className="relative" asChild>
               <Link href="/cart">
                 <ShoppingCart className="h-5 w-5" />
@@ -191,8 +190,8 @@ export function Header() {
             </Button>
           </div>
 
-           <Button variant="ghost" size="icon" className="relative md:hidden" asChild>
-                <Link href="/account">
+            <Link href="/account" passHref className="md:hidden">
+                <Button variant="ghost" size="icon" className="relative">
                     <Heart className="h-5 w-5" />
                     {wishlistCount > 0 && (
                       <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center rounded-full p-0">
@@ -200,9 +199,9 @@ export function Header() {
                       </Badge>
                     )}
                     <span className="sr-only">Wishlist</span>
-                </Link>
-            </Button>
-
+                </Button>
+            </Link>
+         
           <Button variant="ghost" size="icon" className="relative md:hidden" asChild>
               <Link href="/cart">
                 <ShoppingCart className="h-5 w-5" />
@@ -219,6 +218,8 @@ export function Header() {
       <nav className="hidden border-t bg-background py-2 md:block">
           <div className="container mx-auto flex items-center justify-center gap-6 px-4 md:px-6">
             <NavMenu />
+             <Link href="/contact" className="text-sm font-semibold text-foreground transition-colors hover:text-primary">Contact Us</Link>
+             <Link href="/faq" className="text-sm font-semibold text-foreground transition-colors hover:text-primary">FAQs</Link>
           </div>
       </nav>
     </header>
