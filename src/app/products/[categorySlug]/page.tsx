@@ -1,17 +1,14 @@
 
 'use client';
 
-import { useMemo, use } from 'react';
+import { useMemo } from 'react';
 import { products, categories } from '@/lib/data';
 import { ProductFilters } from '@/components/product-filters';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useParams } from 'next/navigation';
 
-interface PageProps {
-  params: { categorySlug: string };
-}
-
-export default function CategoryPage({ params }: PageProps) {
-  const categorySlug = params.categorySlug;
+export default function CategoryPage() {
+  const params = useParams();
+  const categorySlug = params.categorySlug as string;
   const searchParams = useSearchParams();
 
   const category = useMemo(() => categories.find((c) => c.slug === categorySlug), [categorySlug]);
