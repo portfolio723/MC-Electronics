@@ -23,6 +23,89 @@ interface SearchResult {
   brands: string[];
 }
 
+const SearchInput = ({ query, onQueryChange, onFocus, isMobile = false } : { query: string, onQueryChange: (q: string) => void, onFocus: () => void, isMobile?: boolean}) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isMobile && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isMobile]);
+
+  return (
+    <div className="relative w-full">
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <Input
+        ref={inputRef}
+        type="search"
+        placeholder="Search for products, brands..."
+        className="w-full rounded-full bg-slate-100 pl-9 focus:bg-background focus:ring-2 focus:ring-primary"
+        value={query}
+        onChange={(e) => onQueryChange(e.target.value)}
+        onFocus={onFocus}
+      />
+    </div>
+  );
+};
+
+
+const SearchResultsDropdown = ({ results, query }: { results: SearchResult, query: string }) => {
+  const hasResults = results.products.length > 0 || results.categories.length > 0 || results.brands.length > 0;
+  if (!query || !hasResults) return null;
+
+  return (
+    <div className="absolute top-full mt-2 w-full rounded-md border bg-background shadow-lg z-50 max-h-[70vh] overflow-y-auto">
+      {results.products.length > 0 && (
+        <div className="p-2">
+          <h4 className="px-2 py-1 text-xs font-semibold text-muted-foreground">Products</h4>
+          <ul>
+            {results.products.map(product => (
+              <li key={product.id}>
+                <Link href={`/product/${product.id}`} className="flex items-center gap-4 rounded-md p-2 hover:bg-secondary">
+                  <Image src={product.image} alt={product.name} width={40} height={40} className="rounded" />
+                  <div className="flex-1">
+                    <p className="font-semibold text-sm">{product.name}</p>
+                    <p className="text-sm text-primary">${product.price.toFixed(2)}</p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {results.categories.length > 0 && (
+        <div className="p-2">
+          <h4 className="px-2 py-1 text-xs font-semibold text-muted-foreground">Categories</h4>
+           <ul>
+            {results.categories.map(cat => (
+              <li key={cat.id}>
+                <Link href={`/products/${cat.slug}`} className="block rounded-md p-2 text-sm hover:bg-secondary">
+                  {cat.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {results.brands.length > 0 && (
+        <div className="p-2">
+          <h4 className="px-2 py-1 text-xs font-semibold text-muted-foreground">Brands</h4>
+          <ul>
+            {results.brands.map(brand => (
+              <li key={brand}>
+                <Link href={`/products/all?brands=${brand}`} className="block rounded-md p-2 text-sm hover:bg-secondary">
+                  {brand}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 export function SearchBar() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult>({ products: [], categories: [], brands: [] });
@@ -90,75 +173,16 @@ export function SearchBar() {
     };
   }, []);
   
-  const SearchResultsDropdown = () => {
-    const hasResults = results.products.length > 0 || results.categories.length > 0 || results.brands.length > 0;
-    if (!query || !hasResults) return null;
-
-    return (
-      <div className="absolute top-full mt-2 w-full rounded-md border bg-background shadow-lg z-50 max-h-[70vh] overflow-y-auto">
-        {results.products.length > 0 && (
-          <div className="p-2">
-            <h4 className="px-2 py-1 text-xs font-semibold text-muted-foreground">Products</h4>
-            <ul>
-              {results.products.map(product => (
-                <li key={product.id}>
-                  <Link href={`/product/${product.id}`} className="flex items-center gap-4 rounded-md p-2 hover:bg-secondary">
-                    <Image src={product.image} alt={product.name} width={40} height={40} className="rounded" />
-                    <div className="flex-1">
-                      <p className="font-semibold text-sm">{product.name}</p>
-                      <p className="text-sm text-primary">${product.price.toFixed(2)}</p>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {results.categories.length > 0 && (
-          <div className="p-2">
-            <h4 className="px-2 py-1 text-xs font-semibold text-muted-foreground">Categories</h4>
-             <ul>
-              {results.categories.map(cat => (
-                <li key={cat.id}>
-                  <Link href={`/products/${cat.slug}`} className="block rounded-md p-2 text-sm hover:bg-secondary">
-                    {cat.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {results.brands.length > 0 && (
-          <div className="p-2">
-            <h4 className="px-2 py-1 text-xs font-semibold text-muted-foreground">Brands</h4>
-            <ul>
-              {results.brands.map(brand => (
-                <li key={brand}>
-                  <Link href={`/products/all?brands=${brand}`} className="block rounded-md p-2 text-sm hover:bg-secondary">
-                    {brand}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  const SearchInputComponent = ({ isMobile = false } : { isMobile?: boolean }) => (
-    <div className="relative w-full" ref={searchRef}>
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-      <Input
-        type="search"
-        placeholder="Search for products, brands..."
-        className="w-full rounded-full bg-slate-100 pl-9 focus:bg-background focus:ring-2 focus:ring-primary"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+  const SearchContainer = ({ isMobile = false } : { isMobile?: boolean }) => (
+    <div className="relative w-full" ref={isMobile ? null : searchRef}>
+      <SearchInput 
+        query={query} 
+        onQueryChange={setQuery} 
         onFocus={() => setIsFocused(true)}
+        isMobile={isMobile}
       />
-      {isFocused && !isMobile && <SearchResultsDropdown />}
-      {isMobile && <SearchResultsDropdown />}
+      {isFocused && !isMobile && <SearchResultsDropdown results={results} query={query} />}
+      {isMobile && <SearchResultsDropdown results={results} query={query} />}
     </div>
   );
 
@@ -166,7 +190,9 @@ export function SearchBar() {
     <>
       {/* Desktop Search */}
       <div className="hidden md:block w-full">
-        <SearchInputComponent />
+        <div ref={searchRef}>
+          <SearchContainer />
+        </div>
       </div>
 
       {/* Mobile Search */}
@@ -179,7 +205,7 @@ export function SearchBar() {
                 </Button>
             </DialogTrigger>
             <DialogContent className="p-4 top-0 translate-y-0 sm:top-[10%] sm:-translate-y-[10%] h-auto max-h-[80vh] overflow-y-auto">
-                 <SearchInputComponent isMobile={true} />
+                 <SearchContainer isMobile={true} />
             </DialogContent>
         </Dialog>
       </div>
