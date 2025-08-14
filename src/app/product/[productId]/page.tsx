@@ -52,7 +52,7 @@ export default function ProductPage({ params }: PageProps) {
               className="aspect-square w-full rounded-lg border object-cover"
               data-ai-hint={`${categoryName} appliance`}
             />
-            <div className="hidden grid-cols-4 gap-4 md:grid">
+            <div className="grid grid-cols-4 gap-4">
                 {product.images.slice(0,4).map((img, i) => (
                     <button key={i} className="overflow-hidden rounded-lg border-2 border-transparent hover:border-primary">
                         <Image src={img} alt={`${product.name} view ${i+1}`} width={200} height={200} className="aspect-square w-full object-cover" />
