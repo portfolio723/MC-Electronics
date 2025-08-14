@@ -3,7 +3,6 @@
 
 import { useState, useMemo } from 'react';
 import type { Product } from '@/lib/types';
-import { ProductCard } from '@/components/product-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -15,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { ProductListItem } from './product-list-item';
 
 interface ProductFiltersProps {
     initialProducts: Product[];
@@ -149,9 +149,9 @@ export function ProductFilters({ initialProducts }: ProductFiltersProps) {
               </SelectContent>
             </Select>
           </div>
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-6 space-y-4">
             {filteredAndSortedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductListItem key={product.id} product={product} />
             ))}
           </div>
           {filteredAndSortedProducts.length === 0 && (
