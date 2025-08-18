@@ -9,11 +9,11 @@ import { ProductCard } from '@/components/product-card';
 import { FlashSaleCountdown } from '@/components/flash-sale-countdown';
 
 export default function Home() {
-  const categoryIcons: { [key: string]: React.ElementType } = {
-    'large-appliances': Refrigerator,
-    'small-appliances': Zap,
-    'smart-home': HomeIcon,
-    'entertainment': Tv,
+  const categoryInfo: { [key: string]: { icon: React.ElementType, description: string } } = {
+    'large-appliances': { icon: Refrigerator, description: 'Refrigerators, washing machines, and more to power your home.'},
+    'small-appliances': { icon: Zap, description: 'Kitchen gadgets and home helpers for everyday convenience.' },
+    'smart-home': { icon: HomeIcon, description: 'Automate your life with intelligent, connected devices.' },
+    'entertainment': { icon: Tv, description: 'Build your ultimate home theater with our TVs and sound systems.' },
   };
 
   const featuredProducts = products.slice(0, 4);
@@ -68,13 +68,15 @@ export default function Home() {
         </h2>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
           {mainCategories.map((category) => {
-            const Icon = categoryIcons[category.slug] || Refrigerator;
+            const info = categoryInfo[category.slug];
+            const Icon = info?.icon || Refrigerator;
             return (
               <Link key={category.id} href={`/products/${category.slug}`}>
                 <Card className="group flex h-full transform flex-col items-center justify-center p-6 text-center transition-transform duration-300 hover:scale-105 hover:bg-secondary">
-                  <CardContent className="p-0">
+                  <CardContent className="p-0 flex flex-col items-center">
                     <Icon className="mb-4 h-12 w-12 text-primary transition-colors group-hover:text-accent" />
                     <h3 className="font-headline text-lg font-semibold">{category.name}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">{info?.description}</p>
                   </CardContent>
                 </Card>
               </Link>
