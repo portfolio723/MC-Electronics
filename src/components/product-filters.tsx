@@ -137,7 +137,7 @@ export function ProductFilters({ initialProducts }: ProductFiltersProps) {
             <p className="text-sm text-muted-foreground">
               Showing {filteredAndSortedProducts.length} of {initialProducts.length} products
             </p>
-            <Select value={sortOption} onValueChange={setSortOption}>
+            <Select value={sortOption} onValueChange={(value) => setSortOption(value)}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
