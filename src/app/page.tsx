@@ -40,7 +40,7 @@ export default function Home() {
     {
       title: 'Kitchen Essentials',
       href: '/products/small-appliances',
-      image: 'https://images.unsplash.com/photo-1600585152225-3579fe9d7ae2?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://media.istockphoto.com/id/1211554164/photo/3d-render-of-home-appliances-collection-set.jpg?s=612x612&w=0&k=20&c=blm3IyPyZo5ElWLOjI-hFMG-NrKQ0G76JpWGyNttF8s=',
       hint: 'modern kitchen',
     },
     {
