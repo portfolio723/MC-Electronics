@@ -40,6 +40,12 @@ const nextConfig: NextConfig = {
         hostname: 'www.lg.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.domesticappliances.philips.co.in',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

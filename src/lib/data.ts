@@ -88,9 +88,9 @@ export const products: Product[] = [
     brand: 'Philips',
     rating: 4.7,
     stock: 50,
-    image: 'https://images.unsplash.com/photo-1541599188796-444a2539a2b5?q=80&w=1965&auto=format&fit=crop',
+    image: 'https://www.domesticappliances.philips.co.in/cdn/shop/files/NEWNA130_00_3_5b0b10df-8e94-44ab-816e-691203e67355.png?v=1745586560&width=600',
     images: [
-        'https://images.unsplash.com/photo-1541599188796-444a2539a2b5?q=80&w=1965&auto=format&fit=crop', 
+        'https://www.domesticappliances.philips.co.in/cdn/shop/files/NEWNA130_00_3_5b0b10df-8e94-44ab-816e-691203e67355.png?v=1745586560&width=600', 
         'https://images.unsplash.com/photo-1631293931637-11e29e9aaa35?q=80&w=1932&auto=format&fit=crop', 
         'https://images.unsplash.com/photo-1600585152225-3579fe9d7ae2?q=80&w=2070&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1600585152225-3579fe9d7ae2?q=80&w=2070&auto=format&fit=crop'
