@@ -7,7 +7,7 @@ export default function AboutUsPage() {
     <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
       <div className="mx-auto max-w-4xl">
         <h1 className="mb-4 text-center font-headline text-4xl font-bold md:text-5xl">
-          About ApplianceVerse
+          About MC Electronics
         </h1>
         <p className="mb-12 text-center text-lg text-muted-foreground">
           Smart Living, Made Simple.
@@ -22,7 +22,7 @@ export default function AboutUsPage() {
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
             <p>
-              Founded in 2024, ApplianceVerse was born from a simple idea: to make modern living easier and more enjoyable for everyone. We noticed that while technology was advancing rapidly, buying home appliances was still a complicated and often overwhelming process. We set out to change that by creating a single destination for the best appliances, backed by expert advice and world-class customer service.
+              Founded in 2024, MC Electronics was born from a simple idea: to make modern living easier and more enjoyable for everyone. We noticed that while technology was advancing rapidly, buying home appliances was still a complicated and often overwhelming process. We set out to change that by creating a single destination for the best appliances, backed by expert advice and world-class customer service.
             </p>
             <p>
               We are a team of tech enthusiasts, home experts, and customer service professionals passionate about helping you build a smarter, more efficient home. We believe that the right appliances can do more than just perform a task—they can simplify your life, save you time, and bring your family closer together.

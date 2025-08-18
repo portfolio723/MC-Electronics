@@ -14,7 +14,7 @@ export default function WarrantyInfoPage() {
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
             <p>
-              All products sold on ApplianceVerse are covered by the manufacturer's warranty. The duration and terms of the warranty can vary depending on the product and the brand. We encourage you to check the specific warranty details provided on each product's page.
+              All products sold on MC Electronics are covered by the manufacturer's warranty. The duration and terms of the warranty can vary depending on the product and the brand. We encourage you to check the specific warranty details provided on each product's page.
             </p>
             
             <h3 className="font-semibold text-foreground pt-4">What Does the Warranty Cover?</h3>
@@ -33,7 +33,7 @@ export default function WarrantyInfoPage() {
               To claim a warranty, you will generally need to contact the manufacturer's authorized service center directly. You can find their contact information in the warranty card or user manual that comes with the product.
             </p>
             <p>
-                You will need to provide your proof of purchase (the invoice from ApplianceVerse) and the product's serial number. The service center will guide you through the process, which may involve an inspection of the product.
+                You will need to provide your proof of purchase (the invoice from MC Electronics) and the product's serial number. The service center will guide you through the process, which may involve an inspection of the product.
             </p>
             
             <h3 className="font-semibold text-foreground pt-4">Installation and Extended Warranty</h3>
@@ -46,7 +46,7 @@ export default function WarrantyInfoPage() {
 
             <h3 className="font-semibold text-foreground pt-4">Our Commitment</h3>
             <p>
-              While the warranty is provided by the manufacturer, ApplianceVerse is here to assist you. If you face any issues claiming your warranty, please do not hesitate to contact our customer support team, and we will do our best to help you.
+              While the warranty is provided by the manufacturer, MC Electronics is here to assist you. If you face any issues claiming your warranty, please do not hesitate to contact our customer support team, and we will do our best to help you.
             </p>
           </CardContent>
         </Card>

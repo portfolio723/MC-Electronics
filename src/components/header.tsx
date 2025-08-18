@@ -9,7 +9,6 @@ import {
   Heart,
   ChevronDown,
   X,
-  Bookmark,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -51,6 +50,18 @@ export function Header() {
   const getSubcategories = (parentSlug: string): Category[] => {
     return categories.filter(c => c.parent === parentSlug);
   };
+
+  const MCElectronicsLogo = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 11a8 8 0 0 1 8 8" />
+        <path d="M4 4a15 15 0 0 1 15 15" />
+        <path d="M4 18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+        <path d="M12 11v4" />
+        <path d="m14 13-2 2-2-2" />
+        <path d="M20 4h-4" />
+        <path d="M18 6V2" />
+    </svg>
+  );
 
   const NavMenu = ({ isMobile = false }) => (
     <>
@@ -126,8 +137,8 @@ export function Header() {
           <SheetContent side="left" className="flex w-full max-w-sm flex-col p-0">
              <div className="flex h-16 items-center justify-between border-b px-4">
                <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                  <span className="font-headline text-xl font-bold">ApplianceVerse</span>
+                  <MCElectronicsLogo />
+                  <span className="font-headline text-xl font-bold">MC Electronics</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
                   <X className="h-6 w-6" />
@@ -137,18 +148,14 @@ export function Header() {
                <nav className="flex flex-col gap-4">
                 <NavMenu isMobile={true} />
               </nav>
-              <div className="mt-6 flex flex-col gap-4">
-                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="font-semibold text-foreground transition-colors hover:text-primary">Contact Us</Link>
-                  <Link href="/faq" onClick={() => setMobileMenuOpen(false)} className="font-semibold text-foreground transition-colors hover:text-primary">FAQs</Link>
-              </div>
             </div>
           </SheetContent>
         </Sheet>
         
         {/* Logo */}
         <Link href="/" className="hidden md:flex items-center gap-2 mr-6">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-          <span className="font-headline text-2xl font-bold">ApplianceVerse</span>
+          <MCElectronicsLogo />
+          <span className="font-headline text-2xl font-bold">MC Electronics</span>
         </Link>
         
         {/* Centered Search Bar (Desktop) */}
@@ -219,18 +226,6 @@ export function Header() {
       <nav className="hidden border-t bg-background py-2 md:block">
           <div className="container mx-auto flex items-center justify-center gap-6 px-4 md:px-6">
             <NavMenu />
-             <Link href="/products/all?filter=offers" className="text-sm font-semibold text-foreground transition-colors hover:text-primary">Offers</Link>
-             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center gap-1 text-sm font-semibold">
-                    Support <ChevronDown className="h-4 w-4" />
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                    <DropdownMenuItem asChild><Link href="/contact">Contact Us</Link></DropdownMenuItem>
-                    <DropdownMenuItem asChild><Link href="/faq">FAQs</Link></DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
           </div>
       </nav>
     </header>

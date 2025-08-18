@@ -18,8 +18,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useCart } from '@/hooks/use-cart';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/hooks/use-auth';
 
 const shippingFormSchema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -41,9 +42,14 @@ const checkoutFormSchema = shippingFormSchema.merge(paymentFormSchema);
 
 export default function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
+  const { isLoggedIn } = useAuth();
   const { toast } = useToast();
   const router = useRouter();
-  const [checkoutStep, setCheckoutStep] = useState<'shipping' | 'payment'>('shipping');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
 
   const form = useForm<z.infer<typeof checkoutFormSchema>>({
@@ -64,12 +70,16 @@ export default function CheckoutPage() {
     router.push('/');
   };
 
+  if (!isClient) {
+    return null; // or a loading spinner
+  }
+
   if (cartItems.length === 0) {
     return (
         <div className="container mx-auto px-4 py-8 text-center md:px-6 md:py-12">
             <h1 className="font-headline text-3xl font-bold">Checkout</h1>
             <p className="mt-4 text-muted-foreground">Your cart is empty. Please add items before checking out.</p>
-            <Button asChild className="mt-6"><a href="/">Return to Shop</a></Button>
+            <Button asChild className="mt-6"><Link href="/">Return to Shop</Link></Button>
         </div>
     )
   }
@@ -77,24 +87,20 @@ export default function CheckoutPage() {
   const renderGuestAuthStep = () => (
     <Card className="mx-auto max-w-lg">
       <CardHeader>
-        <CardTitle className="text-2xl font-headline">Checkout as Guest or Login</CardTitle>
-        <CardDescription>Have an account? Sign in for a faster experience.</CardDescription>
+        <CardTitle className="text-2xl font-headline">Checkout</CardTitle>
+        <CardDescription>Please sign in to continue.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <Button className="w-full" onClick={() => setCheckoutStep('shipping')}>Continue as Guest</Button>
+        <Button className="w-full" onClick={() => router.push('/login?redirect=/checkout')}>Login</Button>
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">Or sign in</span>
+            <span className="bg-background px-2 text-muted-foreground">Or</span>
           </div>
         </div>
-         <Button variant="outline" className="w-full" onClick={() => router.push('/login')}>Login</Button>
-         <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{' '}
-            <Link href="#" className="underline">Sign up</Link>
-          </div>
+        <Button variant="outline" className="w-full" onClick={() => router.push('/register?redirect=/checkout')}>Create Account</Button>
       </CardContent>
     </Card>
   );
@@ -175,8 +181,17 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
-      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl text-center">Checkout</h1>
-      {renderShippingAndPayment()}
+      {!isLoggedIn && (
+        <div className="mb-8">
+            {renderGuestAuthStep()}
+        </div>
+      )}
+      {isLoggedIn && (
+        <>
+            <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl text-center">Checkout</h1>
+            {renderShippingAndPayment()}
+        </>
+      )}
     </div>
   );
 }

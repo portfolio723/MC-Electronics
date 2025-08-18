@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -10,6 +11,17 @@ const paymentMethods = [
     '/payment-methods/maestro.svg',
 ];
 
+const MCElectronicsLogo = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 11a8 8 0 0 1 8 8" />
+        <path d="M4 4a15 15 0 0 1 15 15" />
+        <path d="M4 18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+        <path d="M12 11v4" />
+        <path d="m14 13-2 2-2-2" />
+        <path d="M20 4h-4" />
+        <path d="M18 6V2" />
+    </svg>
+  );
 
 export function Footer() {
   return (
@@ -18,8 +30,8 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col items-start lg:col-span-1">
              <Link href="/" className="mb-4 flex items-center gap-2">
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                 <span className="font-headline text-2xl font-bold">ApplianceVerse</span>
+                 <MCElectronicsLogo />
+                 <span className="font-headline text-2xl font-bold">MC Electronics</span>
             </Link>
             <p className="text-sm text-muted-foreground">
               Smart Living, Made Simple.
@@ -69,7 +81,7 @@ export function Footer() {
            </div>
         </div>
         <div className="mt-8 border-t pt-4 flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} ApplianceVerse. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} MC Electronics. All Rights Reserved.</p>
             <div className="flex items-center gap-4 mt-4 sm:mt-0">
                <p>Pay securely with</p>
                <div className="flex items-center gap-2">

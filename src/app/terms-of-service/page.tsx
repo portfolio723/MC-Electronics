@@ -10,11 +10,11 @@ export default function TermsOfServicePage() {
         </h1>
         <Card>
           <CardHeader>
-            <CardTitle className="font-headline">Agreement Between User and ApplianceVerse</CardTitle>
+            <CardTitle className="font-headline">Agreement Between User and MC Electronics</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 text-muted-foreground">
             <p>
-              Welcome to ApplianceVerse. The ApplianceVerse website (the "Site") is comprised of various web pages operated by ApplianceVerse. Your use of the Site is conditioned on your acceptance without modification of the terms, conditions, and notices contained herein (the "Terms").
+              Welcome to MC Electronics. The MC Electronics website (the "Site") is comprised of various web pages operated by MC Electronics. Your use of the Site is conditioned on your acceptance without modification of the terms, conditions, and notices contained herein (the "Terms").
             </p>
             
             <div>
@@ -34,21 +34,21 @@ export default function TermsOfServicePage() {
             <div>
               <h3 className="font-semibold text-foreground mb-2">3. Products and Pricing</h3>
               <p>
-                All prices displayed on the Site are quoted in Indian Rupees (INR). ApplianceVerse reserves the right to change prices for products displayed on the Site at any time, and to correct pricing errors that may inadvertently occur. All product descriptions are subject to change at any time without notice, at our sole discretion.
+                All prices displayed on the Site are quoted in Indian Rupees (INR). MC Electronics reserves the right to change prices for products displayed on the Site at any time, and to correct pricing errors that may inadvertently occur. All product descriptions are subject to change at any time without notice, at our sole discretion.
               </p>
             </div>
             
             <div>
               <h3 className="font-semibold text-foreground mb-2">4. Intellectual Property</h3>
               <p>
-                All content included on the Site, such as text, graphics, logos, images, as well as the compilation thereof, and any software used on the Site, is the property of ApplianceVerse or its suppliers and protected by copyright and other laws.
+                All content included on the Site, such as text, graphics, logos, images, as well as the compilation thereof, and any software used on the Site, is the property of MC Electronics or its suppliers and protected by copyright and other laws.
               </p>
             </div>
             
             <div>
               <h3 className="font-semibold text-foreground mb-2">5. Limitation of Liability</h3>
               <p>
-                In no event shall ApplianceVerse, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.
+                In no event shall MC Electronics, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.
               </p>
             </div>
 

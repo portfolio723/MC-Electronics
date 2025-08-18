@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
           </CardHeader>
           <CardContent className="space-y-6 text-muted-foreground">
             <p>
-              Your privacy is important to us. It is ApplianceVerse's policy to respect your privacy regarding any information we may collect from you across our website, and other sites we own and operate.
+              Your privacy is important to us. It is MC Electronics's policy to respect your privacy regarding any information we may collect from you across our website, and other sites we own and operate.
             </p>
             
             <div>

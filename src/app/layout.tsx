@@ -21,7 +21,7 @@ const spaceGrotesk = SpaceGrotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'ApplianceVerse',
+  title: 'MC Electronics',
   description: 'Smart Living, Made Simple',
 };
 
