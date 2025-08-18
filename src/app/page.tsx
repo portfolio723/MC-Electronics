@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -27,19 +28,19 @@ export default function Home() {
     {
       title: 'Kitchen Essentials',
       href: '/products/small-appliances',
-      image: 'https://placehold.co/600x400.png',
+      image: 'https://images.unsplash.com/photo-1600585152225-3579fe9d7ae2?q=80&w=2070&auto=format&fit=crop',
       hint: 'modern kitchen',
     },
     {
       title: 'Smart Home Upgrade',
       href: '/products/smart-home',
-      image: 'https://placehold.co/600x400.png',
+      image: 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2070&auto=format&fit=crop',
       hint: 'smart home technology',
     },
     {
       title: 'Entertainment Hub',
       href: '/products/entertainment',
-      image: 'https://placehold.co/600x400.png',
+      image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=2070&auto=format&fit=crop',
       hint: 'living room entertainment',
     },
   ];
