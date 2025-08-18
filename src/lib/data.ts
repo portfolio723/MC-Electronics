@@ -48,12 +48,12 @@ export const products: Product[] = [
     brand: 'Samsung',
     rating: 4.5,
     stock: 20,
-    image: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2dcb?q=80&w=1887&auto=format&fit=crop',
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/in/rt28c3032gs-hl/gallery/in-ref-tmf-rt3000-448889-rt28c3032gs-hl-535217583?$684_547_PNG$',
     images: [
-        'https://images.unsplash.com/photo-1571175443880-49e1d25b2dcb?q=80&w=1887&auto=format&fit=crop', 
-        'https://images.unsplash.com/photo-1628537362947-a01f78696e78?q=80&w=1887&auto=format&fit=crop', 
-        'https://images.unsplash.com/photo-1616422118318-69a4c0f4d8e5?q=80&w=1887&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1616422118318-69a4c0f4d8e5?q=80&w=1887&auto=format&fit=crop'
+        'https://images.samsung.com/is/image/samsung/p6pim/in/rt28c3032gs-hl/gallery/in-ref-tmf-rt3000-448889-rt28c3032gs-hl-535217583?$684_547_PNG$', 
+        'https://images.samsung.com/is/image/samsung/p6pim/in/rt28c3032gs-hl/gallery/in-ref-tmf-rt3000-448889-rt28c3032gs-hl-535217583?$684_547_PNG$', 
+        'https://images.samsung.com/is/image/samsung/p6pim/in/rt28c3032gs-hl/gallery/in-ref-tmf-rt3000-448889-rt28c3032gs-hl-535217583?$684_547_PNG$',
+        'https://images.samsung.com/is/image/samsung/p6pim/in/rt28c3032gs-hl/gallery/in-ref-tmf-rt3000-448889-rt28c3032gs-hl-535217583?$684_547_PNG$'
     ],
     features: ['Digital Inverter Compressor', 'All-around Cooling', 'Convertible Freezer', 'Toughened Glass Shelves'],
     specs: { 'Capacity': '253L', 'Energy Rating': '3 Star', 'Type': 'Double Door' },
