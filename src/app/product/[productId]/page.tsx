@@ -5,7 +5,6 @@ import { Star, StarHalf, ShieldCheck, Truck, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ProductDetailsClient } from '@/components/product-details-client';
-import SimilarProducts from '@/components/similar-products';
 
 interface PageProps {
   params: { productId: string };
@@ -116,10 +115,6 @@ export default function ProductPage({ params }: PageProps) {
         </Tabs>
       </div>
 
-      <div className="mt-16">
-        <h2 className="font-headline text-2xl font-bold tracking-tight md:text-3xl">You Might Also Like</h2>
-        <SimilarProducts productDescription={product.description} />
-      </div>
     </div>
   );
 }
