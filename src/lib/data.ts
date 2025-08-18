@@ -68,12 +68,12 @@ export const products: Product[] = [
     brand: 'LG',
     rating: 4.6,
     stock: 18,
-    image: 'https://images.unsplash.com/photo-1582735689369-4d39655f4457?q=80&w=1887&auto=format&fit=crop',
+    image: 'https://www.lg.com/content/dam/channel/wcms/in/images/wm/updated/FHB1207Z2M-2010x1334.jpg/_jcr_content/renditions/thum-1600x1062.jpeg',
     images: [
-        'https://images.unsplash.com/photo-1582735689369-4d39655f4457?q=80&w=1887&auto=format&fit=crop', 
-        'https://images.unsplash.com/photo-1626806819282-2c1dc0165452?q=80&w=1887&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1604255296222-2b3a1a5559af?q=80&w=1887&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1604255296222-2b3a1a5559af?q=80&w=1887&auto=format&fit=crop'
+        'https://www.lg.com/content/dam/channel/wcms/in/images/wm/updated/FHB1207Z2M-2010x1334.jpg/_jcr_content/renditions/thum-1600x1062.jpeg', 
+        'https://www.lg.com/content/dam/channel/wcms/in/images/wm/updated/FHB1207Z2M-2010x1334.jpg/_jcr_content/renditions/thum-1600x1062.jpeg',
+        'https://www.lg.com/content/dam/channel/wcms/in/images/wm/updated/FHB1207Z2M-2010x1334.jpg/_jcr_content/renditions/thum-1600x1062.jpeg',
+        'https://www.lg.com/content/dam/channel/wcms/in/images/wm/updated/FHB1207Z2M-2010x1334.jpg/_jcr_content/renditions/thum-1600x1062.jpeg'
     ],
     features: ['6 Motion DD Technology', 'Steam Cycle', 'Inverter Direct Drive Motor', 'Smart Diagnosis'],
     specs: { 'Capacity': '7kg', 'Max Spin Speed': '1200 RPM', 'Type': 'Front Load' },

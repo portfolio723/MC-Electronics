@@ -34,6 +34,12 @@ const nextConfig: NextConfig = {
         hostname: 'images.samsung.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.lg.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
