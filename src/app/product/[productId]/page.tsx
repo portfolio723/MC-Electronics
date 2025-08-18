@@ -7,6 +7,12 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ProductDetailsClient } from '@/components/product-details-client';
 
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    productId: product.id,
+  }));
+}
+
 const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 !== 0;
