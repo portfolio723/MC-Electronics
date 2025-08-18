@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { products, categories } from '@/lib/data';
@@ -5,10 +6,6 @@ import { Star, StarHalf, ShieldCheck, Truck, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ProductDetailsClient } from '@/components/product-details-client';
-
-interface PageProps {
-  params: { productId: string };
-}
 
 const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
@@ -28,7 +25,7 @@ const renderStars = (rating: number) => {
     );
 };
 
-export default function ProductPage({ params }: PageProps) {
+export default function ProductPage({ params }: { params: { productId: string } }) {
   const product = products.find((p) => p.id === params.productId);
 
   if (!product) {
