@@ -15,7 +15,7 @@ const BrandLogos: React.FC<{ brand: string }> = ({ brand }) => {
         Philips: <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Philips_logo_new.svg/2560px-Philips_logo_new.svg.png" alt="Philips" width={100} height={35} className="object-contain" />,
         Kent: <svg className="h-8 w-auto text-muted-foreground group-hover:text-accent-foreground" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.71 14.71L12 12.41l-4.71 4.3-1.42-1.42L10.59 11 6.29 6.71l1.42-1.42L12 9.59l4.29-4.3 1.42 1.42L13.41 11l4.3 4.29-1.42 1.42z"/></svg>,
         Sony: <Image src="https://1000logos.net/wp-content/uploads/2017/06/Sony-Logo.jpg" alt="Sony" width={100} height={35} className="object-contain" />,
-        boAt: <svg className="h-8 w-auto text-muted-foreground group-hover:text-accent-foreground" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9,11.2c-0.6-2.9-2.7-5-5.4-5.7C15.1,5,13.6,4.5,12,4.5s-3.1,0.5-4.5,1c-2.7,0.7-4.8,2.8-5.4,5.7 c-0.2,0.8-0.2,1.7,0,2.5c0.6,2.9,2.7,5,5.4,5.7c1.4,0.5,2.9,1,4.5,1s3.1-0.5,4.5-1c2.7-0.7,4.8-2.8,5.4-5.7 C22.1,12.9,22.1,12.1,21.9,11.2z M12,17.5c-3,0-5.5-2.5-5.5-5.5S9,6.5,12,6.5s5.5,2.5,5.5,5.5S15,17.5,12,17.5z M12,8.5 c-2,0-3.5,1.6-3.5,3.5s1.6,3.5,3.5,3.5s3.5-1.6,3.5-3.5S14,8.5,12,8.5z"/></svg>,
+        boAt: <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Boat_Logo.webp/1200px-Boat_Logo.webp.png" alt="boAt" width={100} height={35} className="object-contain" />,
     };
     return logos[brand] || <span className="font-headline text-xl font-semibold text-muted-foreground group-hover:text-accent-foreground">{brand}</span>;
 }
