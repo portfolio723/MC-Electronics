@@ -15,15 +15,19 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { ProductListItem } from './product-list-item';
+import { useSearchParams } from 'next/navigation';
 
 interface ProductFiltersProps {
     initialProducts: Product[];
 }
 
 export function ProductFilters({ initialProducts }: ProductFiltersProps) {
+  const searchParams = useSearchParams();
+  const brandQuery = searchParams.get('brands');
+  
   const [sortOption, setSortOption] = useState('popularity');
   const [priceRange, setPriceRange] = useState([0, 70000]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(brandQuery ? [brandQuery] : []);
   const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
 
   const availableBrands = useMemo(
@@ -82,7 +86,7 @@ export function ProductFilters({ initialProducts }: ProductFiltersProps) {
                   <Label className="font-semibold">Price Range</Label>
                   <Slider
                     min={0}
-                    max={70000}
+                    max={150000}
                     step={1000}
                     value={priceRange}
                     onValueChange={(value) => setPriceRange(value)}
