@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { products, categories } from '@/lib/data';
 import { ProductFilters } from '@/components/product-filters';
 import { useSearchParams, useParams } from 'next/navigation';
+import type { Category } from '@/lib/types';
 
 export default function CategoryPage() {
   const params = useParams();
