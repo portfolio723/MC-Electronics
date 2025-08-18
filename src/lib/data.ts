@@ -108,11 +108,11 @@ export const products: Product[] = [
     brand: 'Kent',
     rating: 4.8,
     stock: 40,
-    image: 'https://images.unsplash.com/photo-1563250089-3239999f5726?q=80&w=1887&auto=format&fit=crop',
+    image: 'https://m.media-amazon.com/images/I/616UClMhMtL._UF1000,1000_QL80_.jpg',
     images: [
-        'https://images.unsplash.com/photo-1563250089-3239999f5726?q=80&w=1887&auto=format&fit=crop', 
+        'https://m.media-amazon.com/images/I/616UClMhMtL._UF1000,1000_QL80_.jpg', 
         'https://images.unsplash.com/photo-1629429408221-787834237976?q=80&w=1887&auto=format&fit=crop', 
-        'https://images.unsplash.com/photo-1563250089-3239999f5726?q=80&w=1887&auto=format&fit=crop', 
+        'https://m.media-amazon.com/images/I/616UClMhMtL._UF1000,1000_QL80_.jpg',
         'https://images.unsplash.com/photo-1629429408221-787834237976?q=80&w=1887&auto=format&fit=crop'
     ],
     features: ['Multi-stage Purification', 'Mineral RO Technology', '8L Storage Tank', 'In-tank UV Disinfection'],

@@ -46,6 +46,12 @@ const nextConfig: NextConfig = {
         hostname: 'www.domesticappliances.philips.co.in',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
