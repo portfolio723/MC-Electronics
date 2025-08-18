@@ -89,7 +89,7 @@ export function Header() {
           return (
             <DropdownMenu key={item.title}>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className={cn("flex items-center gap-1 text-sm font-semibold", isActive ? "text-primary-active" : "text-foreground")}>
+                <Button variant="ghost" className={cn("flex items-center gap-1 text-sm font-semibold", isActive ? "text-primary" : "text-foreground")}>
                   {item.title} <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -112,7 +112,7 @@ export function Header() {
             onClick={() => isMobile && setMobileMenuOpen(false)}
             className={cn(
               "font-semibold transition-colors hover:text-primary",
-              isActive ? "text-primary-active" : "text-foreground",
+              isActive ? "text-primary" : "text-foreground",
               isMobile ? "py-2 text-lg" : "text-sm",
             )}
           >
