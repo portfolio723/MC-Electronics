@@ -13,7 +13,7 @@ const BrandLogos: React.FC<{ brand: string }> = ({ brand }) => {
         Samsung: <Image src="https://images.samsung.com/is/image/samsung/assets/global/about-us/brand/logo/256_144_2.png?$512_N_PNG$" alt="Samsung" width={100} height={35} className="object-contain" />,
         LG: <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/LG_logo_%282014%29.svg/2560px-LG_logo_%282014%29.svg.png" alt="LG" width={100} height={35} className="object-contain" />,
         Philips: <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Philips_logo_new.svg/2560px-Philips_logo_new.svg.png" alt="Philips" width={100} height={35} className="object-contain" />,
-        Kent: <svg className="h-8 w-auto text-muted-foreground group-hover:text-accent-foreground" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.71 14.71L12 12.41l-4.71 4.3-1.42-1.42L10.59 11 6.29 6.71l1.42-1.42L12 9.59l4.29-4.3 1.42 1.42L13.41 11l4.3 4.29-1.42 1.42z"/></svg>,
+        Kent: <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-cfEj92Q8HVa-HaCwC_uA-_jncqQI0HNTww&s" alt="Kent" width={100} height={35} className="object-contain" />,
         Sony: <Image src="https://1000logos.net/wp-content/uploads/2017/06/Sony-Logo.jpg" alt="Sony" width={100} height={35} className="object-contain" />,
         boAt: <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Boat_Logo.webp/1200px-Boat_Logo.webp.png" alt="boAt" width={100} height={35} className="object-contain" />,
     };

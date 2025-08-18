@@ -64,6 +64,12 @@ const nextConfig: NextConfig = {
         hostname: '1000logos.net',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
