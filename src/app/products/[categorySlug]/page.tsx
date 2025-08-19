@@ -2,6 +2,7 @@
 import { products, categories } from '@/lib/data';
 import { ProductFilters } from '@/components/product-filters';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 export async function generateStaticParams() {
   const allCategories = categories.map((c) => ({
@@ -54,7 +55,9 @@ export default function CategoryPage({ params }: { params: { categorySlug: strin
           Browse and find the perfect appliance for your home.
         </p>
       </header>
-      <ProductFilters initialProducts={initialProducts} />
+      <Suspense fallback={<div>Loading filters...</div>}>
+        <ProductFilters initialProducts={initialProducts} />
+      </Suspense>
     </div>
   );
 }
